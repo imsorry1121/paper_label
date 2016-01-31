@@ -4,8 +4,8 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}">
-	<!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/semantic.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}"> -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.2.0/semantic.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<!--<script type="text/javascript" href="{% static 'js/bootstrap.min.js' %}"></script>-->
@@ -168,7 +168,7 @@
 
 					</div>
 					<div class="ui grid" style="margin-left:35px;margin-right:30px">
-						<div class="twelve wide column left floated">
+						<div class="eleven wide column left floated">
 							{% if uid == '3' %}
 							<a href="/label/compare/{{url_category}}/">
 								{% else %}
@@ -183,7 +183,7 @@
 								<label class="ui label"><label class="ui purple circular label">Coder2</label> {{paper.label2}}</label>
 								{% endif %}
 							</div>
-							<div class="four wide column right floated right aligned">
+							<div class="five wide column right floated right aligned">
 
 								{% if uid == "3" %}
 								<button class="ui primary button" id="save">

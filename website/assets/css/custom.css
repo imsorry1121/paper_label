@@ -1,0 +1,57 @@
+	.chart {
+		font-size: 10px;
+		float: center;
+		width: 500px;
+		height: 210px;
+		overflow: auto;
+		white-space: nowrap;
+	}
+	
+	.axis path,
+	.axis line {
+		fill: none;
+		stroke: #000;
+		shape-rendering: crispEdges;
+	}
+	
+	.letter {
+		fill: white;
+		stroke-width: 2
+	}
+	
+	.precise {
+		stroke: #000000;
+	}
+	
+	.notprecise {
+		stroke: black;
+	}
+	
+	.link {
+		fill: none;
+		stroke: grey;
+		stroke-width: 1
+	}
+	
+	.arrowhead {
+		stroke: grey;
+		fill: grey;
+		stroke-width: 1
+	}
+	
+	.bar {
+		fill: steelblue;
+	}
+	
+	.monthaxis {
+		font-size: 300%;
+	}
+	
+	text.shadow {
+		stroke: #fff;
+		stroke-width: 3px;
+		stroke-opacity: .8;
+	}
+	.red {
+		fill: #941751;
+	}

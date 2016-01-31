@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}">
+	<script type="text/javascript" href="{% static 'js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" href="{% static 'semantic/dist/semantic.min.js' %}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300&amp;subset=latin,vietnamese" rel="stylesheet" type="text/css">
+</head>
+<script type="text/javascript"></script>
+<style type="text/css">
+	.container{
+		padding: 30px;
+		padding-top: 70px;
+		padding-bottom: 50px;
+	}
+	.row{
+		height: 20px;
+	}
+	.item{
+		height: 40px;
+	}
+	h1.ui.header{
+		padding-bottom: 20px;
+	}
+	
+</style>
+<body>
+	<div class="grid container">
+		<div class="ui message">
+			<h1 class="ui header">{{category}}</h1>
+			<div class="ui list">
+				<div class="item">
+					<div class="row">
+						<div class="col-lg-1">
+							<p>Coder 1</p>	
+						</div>
+						<div class="col-lg-1">
+							{{stat.finish1}}/{{stat.total}}
+						</div>
+						<div class="col-lg-10">
+							<div class="progress">
+								<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{stat.percent1}}" aria-valuemin="0" aria-valuemax="100" style="width: {{stat.percent1}}%">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="row">
+						<div class="col-lg-1">
+							<p>Coder 2</p>	
+						</div>
+						<div class="col-lg-1">
+							{{stat.finish2}}/{{stat.total}}
+						</div>
+						<div class="col-lg-10">
+							<div class="progress">
+								<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{stat.percent2}}" aria-valuemin="0" aria-valuemax="100" style="width: {{stat.percent2}}%">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- <a class="ui blue button">Learn more »</a> -->
+		</div>
+		<table class="ui striped table">
+			<thead>
+				<tr>
+					<th>Index</th>
+					<th>Title</th>
+					<!-- <th>Journal</th> -->
+					<!-- <th>Volume</th> -->
+					<th>Label</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for paper in papers%}
+				<tr>
+					<th>{{forloop.counter}}</th>
+					<th>{{paper.title}}</th>
+					<!-- <th>{{paper.journal}}, {{paper.year}} {{paper.month}}</th> -->
+					<!-- <th>{{paper.volume}} {{paper.number}} {{paper.pages}}</th> -->
+					{% if uid == '1'%}
+						<th>{{paper.label1}}</th>
+					{% else %}
+						<th>{{paper.label2}}</th>
+					{% endif%}
+					<th>		
+					<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
+						<button class="ui primary button" id="save" value="">
+							Link
+						</button></th>
+					</a>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</body>
+
+	</html>

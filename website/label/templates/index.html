@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<!--<script type="text/javascript" href="{% static 'js/bootstrap.min.js' %}"></script>-->
+	<script type="text/javascript" href="{% static 'semantic/dist/semantic.min.js' %}"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300&amp;subset=latin,vietnamese" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		.ui.container{
+			width: 95%;
+			padding-top: 30px;	
+			padding-bottom: 30px;
+		}
+		.ui.grid{
+			padding: 30px;
+		}
+		.progress{
+			margin-top: 10px;
+			height: 10px;
+		}
+		.checkbox{
+			display: inline-block;
+		}
+		.warning{
+			position: absolute;
+			z-index: 2
+		}
+		p{
+			margin-bottom: 0.2em;
+		}
+		.abstract{
+			max-height: 280px;
+			overflow: scroll;
+		}
+		.item > label{
+			font-size: 0.7em;
+		}
+		.bs-callout {
+			padding: 20px;
+			margin: 0px 0;
+			margin-bottom: 20px;
+			border: 1px solid #eee;
+			border-left-width: 5px;
+			border-radius: 3px;
+		}
+		.bs-callout h4 {
+			margin-top: 0;
+			margin-bottom: 5px;
+		}
+		.bs-callout p:last-child {
+			margin-bottom: 0;
+		}
+		.bs-callout code {
+			border-radius: 3px;
+		}
+		.bs-callout+.bs-callout {
+			margin-top: -5px;
+		}
+		.bs-callout-default {
+			border-left-color: #777;
+		}
+		.bs-callout-default h4 {
+			color: #777;
+		}
+		.bs-callout-primary {
+			border-left-color: #428bca;
+		}
+		.bs-callout-primary h4 {
+			color: #428bca;
+		}
+		.bs-callout-success {
+			border-left-color: #5cb85c;
+		}
+		.bs-callout-success h4 {
+			color: #5cb85c;
+		}
+		.bs-callout-danger {
+			border-left-color: #d9534f;
+		}
+		.bs-callout-danger h4 {
+			color: #d9534f;
+		}
+		.bs-callout-warning {
+			border-left-color: #f0ad4e;
+		}
+		.bs-callout-warning h4 {
+			color: #f0ad4e;
+		}
+		.bs-callout-info {
+			border-left-color: #5bc0de;
+		}
+		.bs-callout-info h4 {
+			color: #5bc0de;
+		}
+		.options{
+			/*max-height: 460px;*/
+			overflow: scroll;
+		}
+		.grid{
+			padding: 10px !important;
+		}
+		.wide.column{
+			max-height: 480px;
+		}
+		#warning{
+			position: absolute;
+			right: 400px;
+			bottom: 90px;
+			width: 20% !important;	
+			height: 40px !important;
+			padding: 5px;
+			z-index: 2;
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="ui container">
+		<div class="ui red message" id="warning" style="width:50%;margin:0 auto;height:50%;">Please select a topic first</div>
+
+		<div class="hidden">{{time}}</div>
+
+		<div class="ui grid raised very padded text segment">
+
+			<a class="ui red ribbon label">{{index}}</a>
+			<div class="nine wide column">
+				<h3 class="ui header">{{paper.title}}</h3>
+				<p>{{paper.auther}}</p>
+				<p>{{paper.journal}}, {{paper.year}} {{paper.month}}</p>
+				<p>Volume {{paper.volume}}.Number {{paper.number}}.Pages {{paper.pages}}</p>
+<!-- 						<div class="ui labels">
+							{% for keyword in paper.keywords_plus%}
+							<a class="ui label">
+								{{keyword}}
+							</a>
+							{% endfor %}
+						</div> -->
+						<p>{{paper.keywords_plus}}</p>
+						<div class="ui divider"></div>
+						<p class="abstract">{{paper.abstract}}</p>
+						<p></p>
+					</div>	
+					<div class="six wide column segment options" style="margin-top:10px;margin-bottom:10px">
+						<div class="ui list">
+							<div class="inline fields">
+								{% for sub_cate in sub_cates %}
+								<div class="bs-callout">
+									<h4>{{sub_cate.title}}</h4>
+									{% for topic in sub_cate.topics %}
+									<div class="item">
+										<input type="radio" name="frequency"value="{{topic.title}}"> 
+										{{topic.title}}
+									</div>
+									{% endfor %}
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+
+
+					</div>
+					<div class="ui grid" style="margin-left:35px;margin-right:30px">
+						<div class="twelve wide column left floated">
+							{% if uid == '3' %}
+							<a href="/label/compare/{{url_category}}/">
+								{% else %}
+								<a href="/label/list/{{url_category}}/{{uid}}">
+									{% endif %}
+									<button class="ui primary button" id="btn_view">
+										View All
+									</button>
+								</a>
+								{% if uid == '3' %}
+								<label class="ui label"><label class='ui teal circular label'>Coder1</label> {{paper.label1}}</label>
+								<label class="ui label"><label class="ui purple circular label">Coder2</label> {{paper.label2}}</label>
+								{% endif %}
+							</div>
+							<div class="four wide column right floated right aligned">
+
+								{% if uid == "3" %}
+								<button class="ui primary button" id="save">
+									Save
+								</button>
+
+								{% else %}
+								<div class="ui buttons" >
+
+									{% if prev_url != "" %}
+									<a href="{{prev_url}}" >
+										<button class="ui button primary" id="btn_back">
+											<i class="left chevron icon"></i>
+											Back
+										</button>
+									</a>
+
+									{% endif %}
+									<button class="ui primary button" id="save">
+										Save
+									</button>
+									{% if next_url != "" %}
+									<a href="{{next_url}}" >
+										<button class="ui button primary" id="btn_forward">
+											Forward
+											<i class="right chevron icon"></i>
+										</button>
+									</a>
+									{% endif %}
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						<div style="padding-left:55px;padding-right:45px">
+							{% if uid != "3" %}
+
+							<div class="progress" >
+								<!-- <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="{{bar}}" aria-valuemin="0" aria-valuemax="100" style="width: {{bar}}%"> -->
+								<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{bar}}" aria-valuemin="0" aria-valuemax="100" style="width: {{bar}}%">
+								</div>
+
+							</div>
+							{% endif %}
+							
+						</div>
+					</div>
+
+				</div>
+
+			</body>
+
+			</html>
+			<script type="text/javascript">
+				window.onload = function() {
+					var label = "{{label}}";
+					var radios = $("input[type=radio]")
+					for (var i = 0; i < radios.length; i++) {
+						var radio = radios.eq(i);
+						var value = radio.val();
+						if (label==value){
+							radio.attr("checked", true);
+						};
+					}
+				};
+				var url_prefix = 'http://127.0.0.1:8000/label/update/' + '{{url_category}}'+'/'+'{{uid}}'+'/'+'{{pid}}'+'/?';
+				var url_view = 'http://127.0.0.1:8000/label/list/'+ '{{url_category}}'+'/'+'{{uid}}' 
+
+				$("#save").click(function(){
+					var labels = "";
+					var radio = $("input[type=radio]:checked")
+					if (radio.length >0){
+						var value = radio.val();
+						url = url_prefix + "label="+value
+						$.get(url, function(data, status){
+							console.log(status);
+						});
+						if ($("#btn_forward").length!=0){
+							$("#btn_forward").click();
+						}
+						else{
+							setTimeout(10);
+							$("#btn_view").click();
+						}
+					}
+					else{
+						$("#warning").show(1000);
+
+					}
+				});
+			</script>
+

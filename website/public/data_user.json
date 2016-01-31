@@ -1,0 +1,74 @@
+[
+    {
+        "pk": 1,
+        "fields": {
+            "account": "om&or1",
+            "category": "om&or",
+            "pwd": "om&or1"
+        },
+        "model": "user.user"
+    },
+    {
+        "pk": 2,
+        "fields": {
+            "account": "om&or2",
+            "category": "om&or",
+            "pwd": "om&or2"
+        },
+        "model": "user.user"
+    },
+    {
+        "pk": 3,
+        "fields": {
+            "account": "transportation1",
+            "category": "transportation",
+            "pwd": "transportation1"
+        },
+        "model": "user.user"
+    },
+    {
+        "pk": 4,
+        "fields": {
+            "account": "transportation2",
+            "category": "transportation",
+            "pwd": "transportation2"
+        },
+        "model": "user.user"
+    },
+    {
+        "pk": 5,
+        "fields": {
+            "account": "marketing1",
+            "category": "marketing",
+            "pwd": "marketing1"
+        },
+        "model": "user.user"
+    },
+    {
+        "pk": 6,
+        "fields": {
+            "account": "marketing2",
+            "category": "marketing",
+            "pwd": "marketing2"
+        },
+        "model": "user.user"
+    },
+    {
+        "pk": 7,
+        "fields": {
+            "account": "information1",
+            "category": "information management",
+            "pwd": "information1"
+        },
+        "model": "user.user"
+    },
+    {
+        "pk": 8,
+        "fields": {
+            "account": "information2",
+            "category": "information management",
+            "pwd": "information2"
+        },
+        "model": "user.user"
+    }
+]

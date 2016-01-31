@@ -1,0 +1,164 @@
+[
+    {
+        "topics": [
+            {
+                "title": "A1 Business process management"
+            },
+            {
+                "title": "A2 Environment of IT: internal or external"
+            },
+            {
+                "title": "A3 IT and culture"
+            },
+            {
+                "title": "A4 IT value"
+            },
+            {
+                "title": "A5 Organizational design"
+            },
+            {
+                "title": "A6 IS usage / IS adoption / IT acceptance"
+            },
+            {
+                "title": "A7 Societal issues / Societal impact of IS"
+            },
+            {
+                "title": "A8 Sustainability / Green IT/IS"
+            }
+        ],
+        "title": "A. Individual / Organization / Society"
+    },
+    {
+        "topics": [
+            {
+                "title": "B1 End user computing"
+            },
+            {
+                "title": "B2 Innovation"
+            },
+            {
+                "title": "B3 IS management and planning / IS strategy / IT governance"
+            },
+            {
+                "title": "B4 IS staffing"
+            },
+            {
+                "title": "B5 Outsourcing and offshoring"
+            },
+            {
+                "title": "B6 Project management"
+            },
+            {
+                "title": "B7 Security and privacy"
+            },
+            {
+                "title": "B8 Virtual teams"
+            }
+        ],
+        "title": "B. IS Management"
+    },
+    {
+        "topics": [
+            {
+                "title": "C1 Big data / Data Analytics"
+            },
+            {
+                "title": "C2 Business intelligence/ Expert system"
+            },
+            {
+                "title": "C3 Cloud computing"
+            },
+            {
+                "title": "C4 Databases / Database management systems / Data warehousing"
+            },
+            {
+                "title": "C5 IS design and development"
+            },
+            {
+                "title": "C6 IS evaluation"
+            },
+            {
+                "title": "C7 IS implementation"
+            },
+            {
+                "title": "C8 Hardware / Software and programming languages"
+            },
+            {
+                "title": "C9 Mobile computing"
+            },
+            {
+                "title": "C10 Telecommunications and networking"
+            }
+        ],
+        "title": "C. Information Technology and IS Development"
+    },
+    {
+        "topics": [
+            {
+                "title": "D1 Customer relationship management (CRM)"
+            },
+            {
+                "title": "D2 Decision support system & executive IS"
+            },
+            {
+                "title": "D3 E-government"
+            },
+            {
+                "title": "D4 Electronic commerce / Mobile commerce"
+            },
+            {
+                "title": "D5 Enterprise resource planning (ERP)"
+            },
+            {
+                "title": "D6 Global information technology (GIT)"
+            },
+            {
+                "title": "D7 Group support systems "
+            },
+            {
+                "title": "D8 Health information technology"
+            },
+            {
+                "title": "D9 Inter-organizational systems"
+            },
+            {
+                "title": "D10 IS functional applications"
+            },
+            {
+                "title": "D11 Knowledge management"
+            },
+            {
+                "title": "D12 Media and communications"
+            },
+            {
+                "title": "D13 Social media / Social computing / Social Commerce"
+            },
+            {
+                "title": "D14 Social networks"
+            },
+            {
+                "title": "D15 Supply chain management"
+            }
+        ],
+        "title": "D. IS Applications"
+    },
+    {
+        "topics": [
+            {
+                "title": "E1 IS education"
+            },
+            {
+                "title": "E2 IS Theory and Methodology "
+            }
+        ],
+        "title": "E. Education and Theory"
+    },
+    {
+        "topics": [
+            "Relevant to Transportation",
+            "Relevant to OM&OR",
+            "Relevant to Marketing"
+        ],
+        "title": "Not Relevant"
+    }
+]

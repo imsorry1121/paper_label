@@ -4,6 +4,7 @@ import json
 import random
 import re
 import codecs
+import math
 # marketing science
 fields = ['ID', 'author', 'title', 'journal', 'year', 'volumn', 'number', 'pages', 'month', \
 'volume', 'abstract', 'type', 'keyword', 'keywords-plus', 'web-of-science-categories']
@@ -165,17 +166,20 @@ def build_db_paper(threshold=200, ratio=0.1):
 				paper["isi"] = paper.get("ID", "")
 				paper.pop("ID")
 				paper["keywords_plus"] = paper.get("keywords-plus", "")
-				paper["labels1"] = ""
-				paper["labels2"] = ""
-				paper["predictions"] = ""
+				# paper["label1"] = ""
+				# paper["label2"] = ""
+				# paper["prediction"] = ""
 				if paper["keywords_plus"] != "":
 					paper.pop("keywords-plus")
 			cate_papers[category] = cate_papers.get(category, list())+papers
 	for category, papers in sorted(cate_papers.items()):
 		number = max(threshold, int(len(papers)*0.1))
+		number = 20
 		samples = random.sample(range(len(papers)), number)
-		for sample in samples:
-			papers[sample]["is_choosed"] = True
+		for sample in samples[:math.floor(number/2)]:
+			papers[sample]["is_phased1"] = True
+		for sample in samples[math.floor(number/2):]:
+			papers[sample]["is_phased2"] = True
 		instances += papers
 	build_db_format("paper.paper", instances, public_path+"data_paper.json")
 
@@ -248,5 +252,6 @@ if __name__ == "__main__":
 	# preprocess_paper()
 	# preprocess_topic()
 	# stat_type()
-	preprocess_topic()
+	# preprocess_topic()
 	# parse_topic_transportation()
+	build_db_data()

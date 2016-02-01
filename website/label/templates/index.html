@@ -37,6 +37,7 @@
 		.abstract{
 			max-height: 280px;
 			overflow: scroll;
+			font-size: 1.2em;
 		}
 		.item > label{
 			font-size: 0.7em;
@@ -142,7 +143,7 @@
 							</a>
 							{% endfor %}
 						</div> -->
-						<p>{{paper.keywords_plus}}</p>
+						<p>Keywords: {{paper.keywords_plus}}</p>
 						<div class="ui divider"></div>
 						<p class="abstract">{{paper.abstract}}</p>
 						<p></p>
@@ -180,6 +181,11 @@
 								{% if uid == '3' %}
 								<label class="ui label"><label class='ui teal circular label'>Coder1</label> {{paper.label1}}</label>
 								<label class="ui label"><label class="ui purple circular label">Coder2</label> {{paper.label2}}</label>
+								{% elif uid == "1" and label1 != "" %}
+								<label class="ui label"><label class="ui purple circular label">Coder1</label> {{paper.label1}}</label>
+								{% elif uid == "2" and label2 != "" %}
+								<label class="ui label"><label class="ui purple circular label">Coder2</label> {{paper.label2}}</label>
+
 								{% endif %}
 							</div>
 							<div class="five wide column right floated right aligned">
@@ -245,31 +251,33 @@
 							radio.attr("checked", true);
 						};
 					}
-				};
-				var url_prefix = 'http://127.0.0.1:8000/label/update/' + '{{url_category}}'+'/'+'{{uid}}'+'/'+'{{pid}}'+'/?';
-				var url_view = 'http://127.0.0.1:8000/label/list/'+ '{{url_category}}'+'/'+'{{uid}}' 
+					var url_prefix = 'http://127.0.0.1:8000/label/update/' + '{{url_category}}'+'/'+'{{uid}}'+'/'+'{{pid}}'+'/?';
+					var url_view = 'http://127.0.0.1:8000/label/list/'+ '{{url_category}}'+'/'+'{{uid}}' 
 
-				$("#save").click(function(){
-					var labels = "";
-					var radio = $("input[type=radio]:checked")
-					if (radio.length >0){
-						var value = radio.val();
-						url = url_prefix + "label="+value
-						$.get(url, function(data, status){
-							console.log(status);
-						});
-						if ($("#btn_forward").length!=0){
-							$("#btn_forward").click();
+					$("#save").click(function(){
+						var labels = "";
+						var radio = $("input[type=radio]:checked")
+						if (radio.length >0){
+							var value = radio.val();
+							url = url_prefix + "label="+value
+							$.get(url, function(data, status){
+								console.log(status);
+								if ($("#btn_forward").length!=0){
+									$("#btn_forward").click();
+								}
+								else{
+									setTimeout(10);
+									$("#btn_view").click();
+								}
+							});
+
 						}
 						else{
-							setTimeout(10);
-							$("#btn_view").click();
-						}
-					}
-					else{
-						$("#warning").show(1000);
+							$("#warning").show(1000);
 
-					}
-				});
+						}
+					});
+				};
+
 			</script>
 

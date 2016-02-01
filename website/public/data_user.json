@@ -3,72 +3,72 @@
         "pk": 1,
         "model": "user.user",
         "fields": {
-            "account": "marketing1",
-            "pwd": "marketing1",
-            "category": "marketing"
+            "category": "transportation",
+            "account": "transportation1",
+            "pwd": "transportation1"
         }
     },
     {
         "pk": 2,
         "model": "user.user",
         "fields": {
-            "account": "marketing2",
-            "pwd": "marketing2",
-            "category": "marketing"
+            "category": "transportation",
+            "account": "transportation2",
+            "pwd": "transportation2"
         }
     },
     {
         "pk": 3,
         "model": "user.user",
         "fields": {
-            "account": "transportation1",
-            "pwd": "transportation1",
-            "category": "transportation"
+            "category": "marketing",
+            "account": "marketing1",
+            "pwd": "marketing1"
         }
     },
     {
         "pk": 4,
         "model": "user.user",
         "fields": {
-            "account": "transportation2",
-            "pwd": "transportation2",
-            "category": "transportation"
+            "category": "marketing",
+            "account": "marketing2",
+            "pwd": "marketing2"
         }
     },
     {
         "pk": 5,
         "model": "user.user",
         "fields": {
+            "category": "information management",
             "account": "information1",
-            "pwd": "information1",
-            "category": "information management"
+            "pwd": "information1"
         }
     },
     {
         "pk": 6,
         "model": "user.user",
         "fields": {
+            "category": "information management",
             "account": "information2",
-            "pwd": "information2",
-            "category": "information management"
+            "pwd": "information2"
         }
     },
     {
         "pk": 7,
         "model": "user.user",
         "fields": {
+            "category": "om&or",
             "account": "om&or1",
-            "pwd": "om&or1",
-            "category": "om&or"
+            "pwd": "om&or1"
         }
     },
     {
         "pk": 8,
         "model": "user.user",
         "fields": {
+            "category": "om&or",
             "account": "om&or2",
-            "pwd": "om&or2",
-            "category": "om&or"
+            "pwd": "om&or2"
         }
     }
 ]

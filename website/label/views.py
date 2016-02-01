@@ -51,7 +51,8 @@ def login(request):
 		uid = user[0].account[-1]
 		pid = -1
 		choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
-		if len(choosed_papers.filter(label1="", label2=""))==0:
+		total = len(choosed_papers)
+		if len(choosed_papers.filter(label1=""))== total and len(choosed_papers.filter(label2="") == total):
 			return redirect("./compare/%s" %url_category)
 		else:
 			if uid == "1":
@@ -65,7 +66,7 @@ def login(request):
 						pid = index
 						break
 			if pid == -1:
-				return redirect("./index/%s" % url_category)
+				return redirect("./list/%s/%s" % (url_category, uid))
 			else:
 				return redirect("./index/%s/%s/%s" %(url_category, uid, pid))
 
@@ -79,7 +80,6 @@ def index(request, url_category, uid, pid):
 	choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
 	target_paper = choosed_papers[pid]
 	total = len(choosed_papers)
-	print(total)
 	system_time = time.time()
 
 	url_prefix = "/label/index/" + url_category +"/"+ uid+"/"
@@ -119,18 +119,24 @@ def index(request, url_category, uid, pid):
 def update(request, url_category, uid, pid):
 	category = url_mapping[url_category]
 	label = request.GET["label"]
+	time_diff = int(time.time()) - int(request.GET["time"])
 	choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
 	target_paper = choosed_papers[int(pid)]
+	print(time_diff)
 	if str(uid)=="1":
 		target_paper.label1 = label
+		target_paper.time1 = time_diff
 	elif uid=="2":
 		target_paper.label2 = label
+		target_paper.time2 = time_diff
 	elif uid=="3":
 		target_paper.label_final = label
+		target_paper.time_final = time_diff
 	else:
 		return HttpResponse('<h1>Page was found</h1>')
 	if target_paper.label1 == target_paper.label2:
 		target_paper.label_final = label
+		target_paper.time_final = 0
 	target_paper.save()
 	print("save success")
 	return HttpResponse("success")

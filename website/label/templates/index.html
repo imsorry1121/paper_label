@@ -126,7 +126,7 @@
 	<div class="ui container">
 		<div class="ui red message" id="warning" style="width:50%;margin:0 auto;height:50%;">Please select a topic first</div>
 
-		<div class="hidden">{{time}}</div>
+		<div class="hidden" id="time">{{time}}</div>
 
 		<div class="ui grid raised very padded text segment">
 
@@ -259,7 +259,8 @@
 						var radio = $("input[type=radio]:checked")
 						if (radio.length >0){
 							var value = radio.val();
-							url = url_prefix + "label="+value
+							var time = Math.round($("#time").html());
+							var url = url_prefix + "label="+value+"&time="+time
 							$.get(url, function(data, status){
 								console.log(status);
 								if ($("#btn_forward").length!=0){

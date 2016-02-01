@@ -79,6 +79,7 @@ def index(request, url_category, uid, pid):
 	choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
 	target_paper = choosed_papers[pid]
 	total = len(choosed_papers)
+	print(total)
 	system_time = time.time()
 
 	url_prefix = "/label/index/" + url_category +"/"+ uid+"/"
@@ -87,7 +88,7 @@ def index(request, url_category, uid, pid):
 	if pid == 0:
 		prev_url = ""
 		next_url = url_prefix + str(pid+1)
-	elif pid == total:
+	elif pid == total-1:
 		prev_url = url_prefix + str(pid-1)
 		next_url = ""
 	else:
@@ -145,8 +146,8 @@ def list(request, url_category, uid):
 	context["url_category"] = url_category
 	context["papers"] = choosed_papers
 	context["uid"] = uid
-	count1 = int()
-	count2 = int()
+	count1 = 0
+	count2 = 0
 	total = len(choosed_papers)
 	for paper in choosed_papers:
 		if paper.label1 != "":

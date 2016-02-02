@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.db.models import Q
 from user.models import User
 from paper.models import Paper
 import json
@@ -15,9 +16,8 @@ def read_topics():
 	im = read_json("public/topic_im.json")
 	om = read_json("public/topic_om.json")
 	transportation = read_json("public/topic_transportation.json")
-	# marketing = read_json("/public/topic_marketing.json")
-	marketing = dict()
-	topics = {"information": im, "marketing": marketing, "om&or": om, "transportation": transportation}
+	marketing = read_json("public/topic_marketing.json")
+	topics = {"information": im, "marketing": marketing, "om": om, "transportation": transportation}
 	return topics
 
 
@@ -30,8 +30,8 @@ def read_json(filename):
 Views
 '''
 
-category_mapping = {"information management": "information", "marketing": "marketing", "om&or": "om&or", "transportation": "transportation"}
-url_mapping = {"information": "information management", "marketing": "marketing", "om&or": "om&or", "transportation": "transportation"}
+category_mapping = {"information management": "information", "marketing": "marketing", "om&or": "om", "transportation": "transportation"}
+url_mapping = {"information": "information management", "marketing": "marketing", "om": "om&or", "transportation": "transportation"}
 topics = read_topics()
 
 def login(request):
@@ -48,11 +48,11 @@ def login(request):
 		# Check the numbers of unlabeled papers
 		category = user[0].category
 		url_category = category_mapping[category]
-		uid = user[0].account[-1]
+		uid = user[0].index
 		pid = -1
 		choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
 		total = len(choosed_papers)
-		if len(choosed_papers.filter(label1=""))== total and len(choosed_papers.filter(label2="") == total):
+		if (len(choosed_papers.filter(~Q(label1="")))== total and len(choosed_papers.filter(~Q(label2=""))) == total):
 			return redirect("./compare/%s" %url_category)
 		else:
 			if uid == "1":
@@ -96,14 +96,17 @@ def index(request, url_category, uid, pid):
 		next_url = url_prefix + str(pid+1)
 	label = str()
 	if uid == "1":
+		users = User.objects.filter(index=uid, category=category)
 		label = target_paper.label1
 		unlabel_count = len(choosed_papers.filter(label1=""))
 		finish_percent = (total-unlabel_count)/total*100
 	elif uid == "2":
+		users = User.objects.filter(index=uid, category=category)
 		label = target_paper.label2
 		unlabel_count = len(choosed_papers.filter(label2=""))
 		finish_percent = (total-unlabel_count)/total*100
 	elif uid == "3":
+		users = User.objects.filter(category=category)
 		label = target_paper.label_final
 		unaligned_count = len(choosed_papers.filter(label_final=""))
 		finish_percent = (total-unaligned_count)/total*100
@@ -111,7 +114,7 @@ def index(request, url_category, uid, pid):
 		return HttpResponse('<h1>Page was found</h1>')
 
 	# target_paper.keywords_plus = target_paper.keywords_plus.split(";")
-	context = {"uid": uid, "pid": pid, "category": category, "paper": target_paper, "prev_url": prev_url, "next_url": next_url, "bar": finish_percent, "url_category": url_category, "label": label, "index": pid+1, "sub_cates": topics[url_category], "time": system_time}
+	context = {"uid": uid, "pid": pid, "category": category, "users": users, "paper": target_paper, "prev_url": prev_url, "next_url": next_url, "bar": finish_percent, "url_category": url_category, "label": label, "index": pid+1, "sub_cates": topics[url_category], "time": system_time}
 	return render(request, 'index.html', context)
 
 

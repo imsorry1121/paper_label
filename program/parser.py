@@ -27,7 +27,7 @@ Paper
 # Return:
 def preprocess_paper():
 	cate_papers = dict()
-	for path, folders, filenames in os.walk(input_path+papar_path):
+	for path, folders, filenames in os.walk(input_path+paper_path):
 		papers = list()
 		category = str()
 		journal = str()
@@ -44,12 +44,19 @@ def preprocess_paper():
 
 def parse_paper(input_file="../input/Marketing/Marketing Science/Marketing Science(1).bib"):
 	papers_all = list()
+	papers_add = parse_paper_add()
 	with open(input_file, "r") as fi:
 		papers = bibtexparser.loads(fi.read())
 	# one bib one article
 	for paper in papers.entries:
 		if paper["type"] != "Article":
 			continue
+		if paper.get("abstract","") == "":
+			title = remove_reduct_symbol(paper["title"])
+			if papers_add.get(title,"") != "":
+				paper["abstract"] = papers_add[title]
+			else:
+				continue
 		paper_info = dict()
 		for key, value in paper.items():
 			if key in fields:
@@ -57,8 +64,20 @@ def parse_paper(input_file="../input/Marketing/Marketing Science/Marketing Scien
 		papers_all.append(paper_info)
 	return papers_all
 
+def parse_paper_add():
+	papers_abstract = dict()
+	with open(input_path+"paper_add", "r") as fi:
+		for line in fi:
+			tmp = line.split("\t")
+			title = tmp[0].strip()
+			abstract = tmp[1].strip()
+			papers_abstract[title] = abstract
+	return papers_abstract
+
+
+
 def remove_reduct_symbol(sentence):
-	return sentence.replace("\\","").replace("``", "").replace("{''}","").replace("\n", " ")
+	return sentence.replace("\\","").replace("``", "").replace("{''}","").replace("\n", " ").replace("{[}", "[").replace("`","'")
 
 '''
 Topic
@@ -67,6 +86,7 @@ def preprocess_topic():
 	parse_topic_im()
 	parse_topic_transportation()
 	parse_topic_om()
+	parse_topic_marketing()
 
 
 def parse_topic_im():
@@ -104,7 +124,22 @@ def parse_topic_transportation():
 	write_json(output_path+"topic_transportation.json", result)
 
 def parse_topic_marketing():
-	print("marketing")
+	text_origin = str()
+	result = list()
+	with open(input_path+topic_path+"marketing", "r") as fi:
+		text_origin = fi.read()
+	categories = text_origin.split("\n\n")
+	for category in categories:
+		texts = category.split("\n")
+		cate_title, cate_sub = get_brackets(texts[0].strip())
+		cate_title = cate_title.replace("\t", "")
+		cate_desc = texts[1].strip()
+		cate_topic = list()
+		for text in texts[2:]:
+			cate_topic.append({"title": text.strip().replace("\t","")})
+		result.append({"title": cate_title, "sub": cate_sub, "desc": cate_desc, "topics": cate_topic})
+	result.append(parse_relevant("marketing"))
+	write_json(output_path+"topic_marketing.json", result)
 
 def parse_topic_om():
 	text_origin = str()
@@ -137,19 +172,29 @@ DB preprocess
 
 
 def build_db_data():
-	build_db_user()
+	# build_db_user()
 	build_db_paper()
 
+# revise the user account and pwd
 def build_db_user():
-	data = read_parsed_data()
+	# data = read_parsed_data()
+	data = dict()
 	instances = list()
-	for category in data.keys():
-		account_prefix = category.split(" ")[0].lower()
-		for i in range(1,3):
+	with open(input_path+"user", "r") as fi:
+		cates = fi.read().split("\n\n")
+	for cate in cates:
+		texts = cate.split("\n")
+		title = texts[0].strip()
+		for i in range(2):
+			name = texts[1+i*2].strip()
+			account = texts[2+i*2].strip()
+			pwd = create_pwd(4)
 			instance = dict()
-			instance["account"] = account_prefix + str(i)
-			instance["pwd"] = account_prefix + str(i)
-			instance["category"] = category.lower()
+			instance["account"] = account
+			instance["pwd"] = pwd
+			instance["name"] = name
+			instance["category"] = title
+			instance["index"] = str(i+1)
 			instances.append(instance)
 	build_db_format("user.user", instances, public_path+"data_user.json")
 
@@ -158,6 +203,7 @@ def build_db_paper(threshold=200, ratio=0.1):
 	cate_papers = dict()
 	instances = list()
 	for category, cate_dict in sorted(data.items()):
+		# concate papers by sorting journal 
 		for journal, papers in sorted(cate_dict.items()):
 			for paper in papers:
 				paper["category"] = category.lower()
@@ -174,12 +220,14 @@ def build_db_paper(threshold=200, ratio=0.1):
 			cate_papers[category] = cate_papers.get(category, list())+papers
 	for category, papers in sorted(cate_papers.items()):
 		number = max(threshold, int(len(papers)*0.1))
-		number = 20
-		samples = random.sample(range(len(papers)), number)
-		for sample in samples[:math.floor(number/2)]:
-			papers[sample]["is_phased1"] = True
-		for sample in samples[math.floor(number/2):]:
-			papers[sample]["is_phased2"] = True
+		print(number)
+		samples = get_samples(number, len(papers))
+		# samples = random.sample(range(len(papers)), number)
+		for index, sample in enumerate(samples):
+			if index%2 == 0:
+				papers[sample]["is_phased1"] = True	
+			else:
+				papers[sample]["is_phased2"] = True
 		instances += papers
 	build_db_format("paper.paper", instances, public_path+"data_paper.json")
 
@@ -237,10 +285,21 @@ def get_brackets(text):
 	else:
 		return result.group(1).strip(), result.group(2).strip()
 
+def get_samples(k, total):
+	a = total/k
+	b = random.random() * a
+	numbers = list()
+	for i in range(k):
+		numbers.append(math.floor(a*i+b))
+	return numbers
 
-
-
-
+def create_pwd(length):
+	alphabet = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	pwd = ""
+	for i in range(length):
+		index = random.randrange(len(alphabet))
+		pwd= pwd + alphabet[index]
+	return pwd
 
 
 # def save(output_path, articles ):
@@ -249,9 +308,9 @@ def get_brackets(text):
 # 			fo.write(json.dumps(article, indent=4))
 
 if __name__ == "__main__":
-	# preprocess_paper()
+	preprocess_paper()
 	# preprocess_topic()
-	# stat_type()
 	# preprocess_topic()
-	# parse_topic_transportation()
+	
 	build_db_data()
+

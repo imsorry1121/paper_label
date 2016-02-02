@@ -6,9 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<!--<script type="text/javascript" href="{% static 'js/bootstrap.min.js' %}"></script>-->
-	<!-- // <script type="text/javascript" href="{% static 'semantic/dist/semantic.min.js' %}"></script> -->
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'semantic/dist/semantic.min.js' %}"></script>
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300&amp;subset=latin,vietnamese" rel="stylesheet" type="text/css">
 	<style type="text/css">
@@ -153,9 +152,9 @@
 							<div class="inline fields">
 								{% for sub_cate in sub_cates %}
 								<div class="bs-callout">
-									<h4>{{sub_cate.title}}</h4>
+									<h4 class="ui title" data-content="{{sub_cate.desc}}" data-title="{{sub_cate.sub}}">{{sub_cate.title}}</h4>
 									{% for topic in sub_cate.topics %}
-									<div class="item">
+									<div class="item ui" data-content="{{topic.desc}}" data-title="{{topic.sub}}">
 										<input type="radio" name="frequency"value="{{topic.title}}"> 
 										{{topic.title}}
 									</div>
@@ -179,12 +178,12 @@
 									</button>
 								</a>
 								{% if uid == '3' %}
-								<label class="ui label"><label class='ui teal circular label'>Coder1</label> {{paper.label1}}</label>
-								<label class="ui label"><label class="ui purple circular label">Coder2</label> {{paper.label2}}</label>
+								<label class="ui label"><label class='ui teal circular label'>{{users.0.name}}</label> {{paper.label1}}</label>
+								<label class="ui label"><label class="ui purple circular label">{{users.1.name}}</label> {{paper.label2}}</label>
 								{% elif uid == "1" and label1 != "" %}
-								<label class="ui label"><label class="ui purple circular label">Coder1</label> {{paper.label1}}</label>
+								<label class="ui label"><label class="ui purple circular label">{{users.0.name}}</label> {{paper.label1}}</label>
 								{% elif uid == "2" and label2 != "" %}
-								<label class="ui label"><label class="ui purple circular label">Coder2</label> {{paper.label2}}</label>
+								<label class="ui label"><label class="ui purple circular label">{{users.0.name}}</label> {{paper.label2}}</label>
 
 								{% endif %}
 							</div>
@@ -278,6 +277,18 @@
 
 						}
 					});
+					$('.item.ui')
+					.popup({
+						// popup : $('.item.ui'),
+						on: 'hover'
+					})
+					;
+					$('.title.ui')
+					.popup({
+						// popup : $('.item.ui'),
+						on: 'hover'
+					})
+					;
 				};
 
 			</script>

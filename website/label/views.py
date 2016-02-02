@@ -155,6 +155,7 @@ def list(request, url_category, uid):
 	context["url_category"] = url_category
 	context["papers"] = choosed_papers
 	context["uid"] = uid
+	users = User.objects.filter(category=category)
 	count1 = 0
 	count2 = 0
 	total = len(choosed_papers)
@@ -163,7 +164,7 @@ def list(request, url_category, uid):
 			count1+=1
 		if paper.label2 != "":
 			count2+=1
-	context["stat"] = {"finish1": count1, "finish2": count2, "total": total, "percent1": count1/total*100, "percent2": count2/total*100}
+	context["stat"] = {"user1": users[0].name, "user2": users[1].name, "finish1": count1, "finish2": count2, "total": total, "percent1": count1/total*100, "percent2": count2/total*100}
 	return render(request, "list.html", context)
 
 def compare(request, url_category):
@@ -173,6 +174,7 @@ def compare(request, url_category):
 	context["category"] = category
 	context["url_category"] = url_category
 	context["papers"] = choosed_papers
+	users = User.objects.filter(category=category)
 	count1 = int()
 	count2 = int()
 	unalignment_count = int()
@@ -180,7 +182,7 @@ def compare(request, url_category):
 	for paper in choosed_papers:
 		if paper.label1 != "" and paper.label2 != "" and paper.label1 != paper.label2 and paper.label_final == "":
 			unalignment_count +=1
-	context["stat"] = {"total": total, "unalignment": unalignment_count, "unalignment_ratio": unalignment_count/total*100}
+	context["stat"] = {"user1": users[0].name, "user2": users[1].name, "total": total, "unalignment": unalignment_count, "unalignment_ratio": unalignment_count/total*100}
 	context["sub_cates"] = topics[url_category]
 	context["uid"] = "3"
 	return render(request, "compare.html", context)

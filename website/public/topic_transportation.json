@@ -2,24 +2,24 @@
     {
         "topics": [
             {
-                "sub": "design and/or analysis of transportation systems",
+                "desc": "包含航空、海運、鐵公路及城市交通發展規劃。",
                 "title": "運輸系統設計與分析",
-                "desc": "包含航空、海運、鐵公路及城市交通發展規劃。"
+                "sub": "design and/or analysis of transportation systems"
             },
             {
-                "sub": "optimizing transportation problems",
+                "desc": "以計量經濟及數學模型，改善運輸模型。離散選擇模型(Discrete choice modelling)以及流量均衡模型(Traffic equilibrium model)是近來常用的模型理論。",
                 "title": "優化運輸模型",
-                "desc": "以計量經濟及數學模型，改善運輸模型。離散選擇模型(Discrete choice modelling)以及流量均衡模型(Traffic equilibrium model)是近來常用的模型理論。"
+                "sub": "optimizing transportation problems"
             },
             {
-                "sub": "driver/traveler/traffic flow behavior modeling",
+                "desc": "將運輸學門跨領域結合物理學、行為理論、計量經濟、生物科學，針對駕駛者/旅行者/巨觀車流的行為找出適合的模型，進而改善現有的運輸問題。",
                 "title": "駕駛者/旅行者/車流行為模型",
-                "desc": "將運輸學門跨領域結合物理學、行為理論、計量經濟、生物科學，針對駕駛者/旅行者/巨觀車流的行為找出適合的模型，進而改善現有的運輸問題。"
+                "sub": "driver/traveler/traffic flow behavior modeling"
             },
             {
-                "sub": "transportation technology",
+                "desc": "隨著科技進步，將新的資訊技術結合既有的運輸理論來發展新的運輸科技系統。",
                 "title": "運輸科技",
-                "desc": "隨著科技進步，將新的資訊技術結合既有的運輸理論來發展新的運輸科技系統。"
+                "sub": "transportation technology"
             }
         ],
         "title": "運輸理論與方法"
@@ -27,24 +27,24 @@
     {
         "topics": [
             {
-                "sub": "transport policy",
+                "desc": "關注政策制定者如何決定政策，監測政策帶來的影響，並建議如何改善。",
                 "title": "交通政策",
-                "desc": "關注政策制定者如何決定政策，監測政策帶來的影響，並建議如何改善。"
+                "sub": "transport policy"
             },
             {
-                "sub": "transportation infrastructure;urban  transportation planning;public transportation planning",
+                "desc": "關於公共運輸及交通規畫的研究。",
                 "title": "交通基礎建設;城市交通規劃;公共運輸規劃",
-                "desc": "關於公共運輸及交通規畫的研究。"
+                "sub": "transportation infrastructure;urban  transportation planning;public transportation planning"
             },
             {
-                "sub": "transportation costs & pricing",
+                "desc": "研究運輸成本並建議適當的定價策略",
                 "title": "運輸成本與訂價",
-                "desc": "研究運輸成本並建議適當的定價策略"
+                "sub": "transportation costs & pricing"
             },
             {
-                "sub": "transportation service",
+                "desc": "結合服務科學提供運輸服務業更好的解決方案。",
                 "title": "運輸服務品質",
-                "desc": "結合服務科學提供運輸服務業更好的解決方案。"
+                "sub": "transportation service"
             }
         ],
         "title": "運輸經濟與政策"
@@ -52,24 +52,24 @@
     {
         "topics": [
             {
-                "sub": "transportation network traffic assignment",
+                "desc": "解決在運輸網路中，運具服務分配問題。",
                 "title": "運輸網路交通指派",
-                "desc": "解決在運輸網路中，運具服務分配問題。"
+                "sub": "transportation network traffic assignment"
             },
             {
-                "sub": "optimal path",
+                "desc": "在已建立好的網路圖中，找出最佳路徑規劃。",
                 "title": "最佳運輸路徑",
-                "desc": "在已建立好的網路圖中，找出最佳路徑規劃。"
+                "sub": "optimal path"
             },
             {
-                "sub": "location",
+                "desc": "城市規劃或運輸規劃中的設施區位選擇問題",
                 "title": "區位選擇",
-                "desc": "城市規劃或運輸規劃中的設施區位選擇問題"
+                "sub": "location"
             },
             {
-                "sub": "network algorithms",
+                "desc": "在複雜的運輸網路問題中，改善演算法，以降低求解速度，取得品質更佳的運算結果。",
                 "title": "網路演算法",
-                "desc": "在複雜的運輸網路問題中，改善演算法，以降低求解速度，取得品質更佳的運算結果。"
+                "sub": "network algorithms"
             }
         ],
         "title": "運輸網路"
@@ -77,19 +77,19 @@
     {
         "topics": [
             {
-                "sub": "traffic accident countermeasure",
+                "desc": "在設計運輸規劃時加入安全因素或是改善交通規畫以達到交通事故的預防。",
                 "title": "交通事故預防",
-                "desc": "在設計運輸規劃時加入安全因素或是改善交通規畫以達到交通事故的預防。"
+                "sub": "traffic accident countermeasure"
             },
             {
-                "sub": "environmental and vehicular factors influencing the occurrence of traffic accident",
+                "desc": "分析環境和車輛如何構成造成事故的因素。",
                 "title": "環境與運具對事故之影響",
-                "desc": "分析環境和車輛如何構成造成事故的因素。"
+                "sub": "environmental and vehicular factors influencing the occurrence of traffic accident"
             },
             {
-                "sub": "driving violation behavior",
+                "desc": "研究酒駕、分心...等不良駕駛行為對交通安全的影響。",
                 "title": "不良駕駛行為",
-                "desc": "研究酒駕、分心...等不良駕駛行為對交通安全的影響。"
+                "sub": "driving violation behavior"
             }
         ],
         "title": "運輸安全"
@@ -97,24 +97,24 @@
     {
         "topics": [
             {
-                "sub": "supply chain collaboration",
+                "desc": "供應鏈上的協同合作。",
                 "title": "供應鏈協同整合",
-                "desc": "供應鏈上的協同合作。"
+                "sub": "supply chain collaboration"
             },
             {
-                "sub": "vehicle routing problems",
+                "desc": "在貨物運送過程中，規劃適當行車路線及載量，滿足各點需求。",
                 "title": "車輛途程問題",
-                "desc": "在貨物運送過程中，規劃適當行車路線及載量，滿足各點需求。"
+                "sub": "vehicle routing problems"
             },
             {
-                "sub": "inventory management",
+                "desc": "針對不同產品特色研究存貨策略。",
                 "title": "存貨管理",
-                "desc": "針對不同產品特色研究存貨策略。"
+                "sub": "inventory management"
             },
             {
-                "sub": "",
+                "desc": "利用新的資訊技術整合物聯網、大數據，打造更精確及快速反應的運籌管理系統。",
                 "title": "IT技術整合",
-                "desc": "利用新的資訊技術整合物聯網、大數據，打造更精確及快速反應的運籌管理系統。"
+                "sub": ""
             }
         ],
         "title": "物流管理"
@@ -122,34 +122,42 @@
     {
         "topics": [
             {
-                "sub": "emergency response of disaster",
+                "desc": "針對在災害發生後，物資運送以及運輸系統中斷的災害應變研究。",
                 "title": "災害應變",
-                "desc": "針對在災害發生後，物資運送以及運輸系統中斷的災害應變研究。"
+                "sub": "emergency response of disaster"
             },
             {
-                "sub": "green supply chain management",
+                "desc": "將環保因素加入供應鏈整合，包含回收、綠色運輸、環保原料、環保包裝...等。",
                 "title": "綠色供應鏈",
-                "desc": "將環保因素加入供應鏈整合，包含回收、綠色運輸、環保原料、環保包裝...等。"
+                "sub": "green supply chain management"
             },
             {
-                "sub": "green energy",
+                "desc": "在生產、製造、運輸過程中，用綠色能源取代傳統能源。",
                 "title": "綠色能源",
-                "desc": "在生產、製造、運輸過程中，用綠色能源取代傳統能源。"
+                "sub": "green energy"
             },
             {
-                "sub": "sustainable transportation",
+                "desc": "找出運輸系統對環境的影響、自然資源的消耗和大氣的污染，結合綠色能源技術，打造永續運輸環境。",
                 "title": "永續運輸",
-                "desc": "找出運輸系統對環境的影響、自然資源的消耗和大氣的污染，結合綠色能源技術，打造永續運輸環境。"
+                "sub": "sustainable transportation"
             }
         ],
         "title": "環境與能源"
     },
     {
         "topics": [
-            "Relevant to IM",
-            "Relevant to OM&OR",
-            "Relevant to Marketing"
+            {
+                "title": "Others but relevent to Transportation"
+            }
         ],
-        "title": "Not Relevant"
+        "title": "Others"
+    },
+    {
+        "topics": [
+            {
+                "title": "Not relevant"
+            }
+        ],
+        "title": "Not relevant"
     }
 ]

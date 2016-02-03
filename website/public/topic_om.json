@@ -2,44 +2,44 @@
     {
         "topics": [
             {
-                "sub": "永續議題",
-                "title": "A1 Sustainability"
+                "title": "A1 Sustainability",
+                "sub": "永續議題"
             },
             {
-                "sub": "對社會產生影響之企業或作業責任",
-                "title": "A2 Social responsibility"
+                "title": "A2 Social responsibility",
+                "sub": "對社會產生影響之企業或作業責任"
             },
             {
-                "sub": "對環境產生影響之企業或作業任責",
-                "title": "A3 Environmental responsibility"
+                "title": "A3 Environmental responsibility",
+                "sub": "對環境產生影響之企業或作業任責"
             },
             {
-                "sub": "綠色製造程序、原料",
-                "title": "A4 Green manufacturing"
+                "title": "A4 Green manufacturing",
+                "sub": "綠色製造程序、原料"
             },
             {
-                "sub": "綠色供應鏈，上游廠商選取、原料使用、運送、貯存",
-                "title": "A5 Green supply chain"
+                "title": "A5 Green supply chain",
+                "sub": "綠色供應鏈，上游廠商選取、原料使用、運送、貯存"
             },
             {
-                "sub": "低碳、低能原消耗原則",
-                "title": "A6 Energy-awareness"
+                "title": "A6 Energy-awareness",
+                "sub": "低碳、低能原消耗原則"
             },
             {
-                "sub": "綠色計算",
-                "title": "A7 Green computing"
+                "title": "A7 Green computing",
+                "sub": "綠色計算"
             },
             {
-                "sub": "網絡設計",
-                "title": "A8 Network design"
+                "title": "A8 Network design",
+                "sub": "網絡設計"
             },
             {
-                "sub": "閉環供應鏈，原料、生產、運送、回收等完成作業之議題",
-                "title": "A9 Closed-loop supply chain"
+                "title": "A9 Closed-loop supply chain",
+                "sub": "閉環供應鏈，原料、生產、運送、回收等完成作業之議題"
             },
             {
-                "sub": "資源之分配，例如藥品、科研預算等，另亦涉及分配物品之貯運議題",
-                "title": "A10 Resource allocation and distribution"
+                "title": "A10 Resource allocation and distribution",
+                "sub": "資源之分配，例如藥品、科研預算等，另亦涉及分配物品之貯運議題"
             }
         ],
         "title": "A. Individual/Organization/Society"
@@ -47,40 +47,40 @@
     {
         "topics": [
             {
-                "sub": "產品開發支各項管理議題",
-                "title": "B1 Product development management"
+                "title": "B1 Product development management",
+                "sub": "產品開發支各項管理議題"
             },
             {
-                "sub": "彈性製造系統",
-                "title": "B2 Flexible manufacturing systems"
+                "title": "B2 Flexible manufacturing systems",
+                "sub": "彈性製造系統"
             },
             {
-                "sub": "績效管理",
-                "title": "B3 Performance measurement"
+                "title": "B3 Performance measurement",
+                "sub": "績效管理"
             },
             {
-                "sub": "供應鏈斷鍊之管理與因應",
-                "title": "B4 Supply chain disruption management"
+                "title": "B4 Supply chain disruption management",
+                "sub": "供應鏈斷鍊之管理與因應"
             },
             {
-                "sub": "供應鏈成員之協調，製造、運送、貯存之協議、同步作業、利益分享",
-                "title": "B5 Supply chain coordination"
+                "title": "B5 Supply chain coordination",
+                "sub": "供應鏈成員之協調，製造、運送、貯存之協議、同步作業、利益分享"
             },
             {
-                "sub": "穩定上游供應之管理",
-                "title": "B6 Responsible and reliable sourcing in supply chain"
+                "title": "B6 Responsible and reliable sourcing in supply chain",
+                "sub": "穩定上游供應之管理"
             },
             {
-                "sub": "協同存貨作業",
-                "title": "B7 Joint inventory/stocking"
+                "title": "B7 Joint inventory/stocking",
+                "sub": "協同存貨作業"
             },
             {
-                "sub": "配送網路之管理",
-                "title": "B8 Distribution logistics management"
+                "title": "B8 Distribution logistics management",
+                "sub": "配送網路之管理"
             },
             {
-                "sub": "外包、合約等管理議題",
-                "title": "B9 Outsourcing/contract management"
+                "title": "B9 Outsourcing/contract management",
+                "sub": "外包、合約等管理議題"
             }
         ],
         "title": "B. Management "
@@ -88,60 +88,60 @@
     {
         "topics": [
             {
-                "sub": "服務品質",
-                "title": "C1 Service quality"
+                "title": "C1 Service quality",
+                "sub": "服務品質"
             },
             {
-                "sub": "全面品質管理",
-                "title": "C2 TQM"
+                "title": "C2 TQM",
+                "sub": "全面品質管理"
             },
             {
-                "sub": "彈性與精實製造",
-                "title": "C3 Lean and flexible manufacturing"
+                "title": "C3 Lean and flexible manufacturing",
+                "sub": "彈性與精實製造"
             },
             {
-                "sub": "雲端運算之技術、系統建構",
-                "title": "C4 Cloud computing"
+                "title": "C4 Cloud computing",
+                "sub": "雲端運算之技術、系統建構"
             },
             {
-                "sub": "產品再製程序管理",
-                "title": "C5 Remanufacturing"
+                "title": "C5 Remanufacturing",
+                "sub": "產品再製程序管理"
             },
             {
-                "sub": "涉及不確定因素之決策方法",
-                "title": "C6 Decision making under uncertainty"
+                "title": "C6 Decision making under uncertainty",
+                "sub": "涉及不確定因素之決策方法"
             },
             {
-                "sub": "穩健型最佳化、系統設計與建置",
-                "title": "C7 Robust optimization and design"
+                "title": "C7 Robust optimization and design",
+                "sub": "穩健型最佳化、系統設計與建置"
             },
             {
-                "sub": "運用與整合網路社群之資源與專業進行解題",
-                "title": "C8 Crowd sourcing"
+                "title": "C8 Crowd sourcing",
+                "sub": "運用與整合網路社群之資源與專業進行解題"
             },
             {
-                "sub": "供應鏈之競合",
-                "title": "C9 Coordination and competition in supply chains"
+                "title": "C9 Coordination and competition in supply chains",
+                "sub": "供應鏈之競合"
             },
             {
-                "sub": "引進賽局模型之作業管理",
-                "title": "C10 Game-theory-based operations management"
+                "title": "C10 Game-theory-based operations management",
+                "sub": "引進賽局模型之作業管理"
             },
             {
-                "sub": "機制設計，包含利益分享機制、競合規則等",
-                "title": "C11 Mechanism design"
+                "title": "C11 Mechanism design",
+                "sub": "機制設計，包含利益分享機制、競合規則等"
             },
             {
-                "sub": "考量行為、心裡因素之作業管理",
-                "title": "C11 Behavior-based operations management"
+                "title": "C11 Behavior-based operations management",
+                "sub": "考量行為、心裡因素之作業管理"
             },
             {
-                "sub": "社群或網絡分路",
-                "title": "C12 Social network analysis"
+                "title": "C12 Social network analysis",
+                "sub": "社群或網絡分路"
             },
             {
-                "sub": "資訊分享與資訊不對稱之議題",
-                "title": "C13 Information sharing, Information asymmetry"
+                "title": "C13 Information sharing, Information asymmetry",
+                "sub": "資訊分享與資訊不對稱之議題"
             }
         ],
         "title": "C. Methods and Technology "
@@ -149,38 +149,46 @@
     {
         "topics": [
             {
-                "sub": "單一組織的研究應用成果",
-                "title": "D1 Case study"
+                "title": "D1 Case study",
+                "sub": "單一組織的研究應用成果"
             },
             {
-                "sub": "先進研究方法之晉用成果",
-                "title": "D2 Report of implementations of advanced OM methodologies"
+                "title": "D2 Report of implementations of advanced OM methodologies",
+                "sub": "先進研究方法之晉用成果"
             },
             {
-                "sub": "收集資料所呈現可資推廣使用之特殊方法或技術",
-                "title": "D3 Empirical analysis"
+                "title": "D3 Empirical analysis",
+                "sub": "收集資料所呈現可資推廣使用之特殊方法或技術"
             },
             {
-                "sub": "醫療照護之作業管理",
-                "title": "D4 Health-care operations management"
+                "title": "D4 Health-care operations management",
+                "sub": "醫療照護之作業管理"
             },
             {
-                "sub": "觀光、休閒、娛樂事業之作業管理",
-                "title": "D5 Tourism and entertainment management"
+                "title": "D5 Tourism and entertainment management",
+                "sub": "觀光、休閒、娛樂事業之作業管理"
             },
             {
-                "sub": "食品業之產銷管理",
-                "title": "D6 Production and distribution in food industry"
+                "title": "D6 Production and distribution in food industry",
+                "sub": "食品業之產銷管理"
             }
         ],
         "title": "D. Applications in Specific Industries/Organizations "
     },
     {
         "topics": [
-            "Relevant to IM",
-            "Relevant to Transportation",
-            "Relevant to Marketing"
+            {
+                "title": "Others but relevent to OM&OR"
+            }
         ],
-        "title": "Not Relevant"
+        "title": "Others"
+    },
+    {
+        "topics": [
+            {
+                "title": "Not relevant"
+            }
+        ],
+        "title": "Not relevant"
     }
 ]

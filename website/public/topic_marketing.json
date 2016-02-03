@@ -1,6 +1,5 @@
 [
     {
-        "title": "1)Consumer Behavior",
         "desc": "Consumer behavior is the study of how individual customers, groups or organizations select, buy, use, and dispose ideas, goods, and services to satisfy their needs and wants. It refers to the actions of the consumers in the marketplace and the underlying motives for those actions.消費者行為是指消費者為獲取、使用、處置消費物品或服務所採取的各種行動，包括先於且決定這些行動的決策過程。集中於探討消費者的行為，從消費者的購買決策、消費行為、到消費者忠誠度等。",
         "topics": [
             {
@@ -28,10 +27,10 @@
                 "title": "8.Consumer Behavior"
             }
         ],
+        "title": "1)Consumer Behavior",
         "sub": "消費者行為"
     },
     {
-        "title": "2)Advertising/ Marketing Communication/ Brand",
         "desc": "This topic refers to (a) the types of communication (i.e., advertising, brand, word-of-mouth, etc.), used by a company or individual to reach their target market; (b) the influence of advertising/ brand/ communication.廣告/行銷溝通/品牌議題主要在研究與消費者發生信息交流的途徑，例如:溝通、網路傳播、口碑傳播等等。",
         "topics": [
             {
@@ -68,10 +67,10 @@
                 "title": "11.Brand Advertising"
             }
         ],
+        "title": "2)Advertising/ Marketing Communication/ Brand",
         "sub": "廣告/行銷溝通/品牌"
     },
     {
-        "title": "3)Strategy",
         "desc": "Marketing strategies includes all basic, short-term, and long-term activities in the field of marketing that deal with the analysis of the strategic initial situation of a company and the formulation, evaluation and selection of market-oriented strategies.",
         "topics": [
             {
@@ -102,10 +101,10 @@
                 "title": "9.Brand Equity"
             }
         ],
+        "title": "3)Strategy",
         "sub": "策略"
     },
     {
-        "title": "4)Service Marketing/Sales Management",
         "desc": "This topic focuses on services marketing and management of a firm's sales operations.",
         "topics": [
             {
@@ -136,10 +135,10 @@
                 "title": "9.Service Quality"
             }
         ],
+        "title": "4)Service Marketing/Sales Management",
         "sub": "服務行銷與銷售管理"
     },
     {
-        "title": "5)Retailing & Channel",
         "desc": "This topic focuses on looking into marketing channels.",
         "topics": [
             {
@@ -155,10 +154,10 @@
                 "title": "4.Marketing Channels"
             }
         ],
+        "title": "5)Retailing & Channel",
         "sub": "零售與通路"
     },
     {
-        "title": "6)Methodological Issues",
         "desc": "This topic is related with (a) research methods (i.e, bayesian analysis, Econometrics), (b) financial metrics (i.e, Profit And Cost Analysis), or (c) develop measurement.",
         "topics": [
             {
@@ -183,10 +182,10 @@
                 "title": "7.Other Methods"
             }
         ],
+        "title": "6)Methodological Issues",
         "sub": "研究方法相關議題"
     },
     {
-        "title": "7)Organizational Issues",
         "desc": "This topic is related with organizational management, focus on “management” issue, for example, supply chain management, human resource management etc.",
         "topics": [
             {
@@ -202,10 +201,10 @@
                 "title": "4.Supply Chain Management"
             }
         ],
+        "title": "7)Organizational Issues",
         "sub": "組織相關議題"
     },
     {
-        "title": "8)Product/ Service Development",
         "desc": "This topic is related with (a) product/ service development, (b) related actions occurs during product/service development process, i.e., create value, co-create, etc., (c) other issues focus on “product/ service”.",
         "topics": [
             {
@@ -224,11 +223,11 @@
                 "title": "5.Value Creation"
             }
         ],
+        "title": "8)Product/ Service Development",
         "sub": "產品/服務開發"
     },
     {
-        "title": "9)Others",
-        "desc": "Others",
+        "desc": "Miscellaneous",
         "topics": [
             {
                 "title": "1.Customer Relationship Management"
@@ -252,14 +251,23 @@
                 "title": "7.Market or Industry Analysis"
             }
         ],
+        "title": "9)Miscellaneous",
         "sub": ""
     },
     {
-        "title": "Not Relevant",
         "topics": [
-            "Relevant to IM",
-            "Relevant to Transportation",
-            "Relevant to OM&OR"
-        ]
+            {
+                "title": "Others but relevent to Marketing"
+            }
+        ],
+        "title": "Others"
+    },
+    {
+        "topics": [
+            {
+                "title": "Not relevant"
+            }
+        ],
+        "title": "Not relevant"
     }
 ]

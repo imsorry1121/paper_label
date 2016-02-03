@@ -7,4 +7,6 @@ class User(models.Model):
 	pwd = models.CharField(max_length=255)
 	category = models.CharField(max_length=255)
 	index = models.CharField(max_length=20, default="")
+	is_phased1 = models.BooleanField(default=True)
+	is_phased2 = models.BooleanField(default=False)
 

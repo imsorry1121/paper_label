@@ -8,6 +8,8 @@ import time
 # Create your views here.
 
 
+
+
 '''
 Helper function
 '''
@@ -26,12 +28,18 @@ def read_json(filename):
 		result = json.loads(fo.read())
 	return result
 
+def get_om_topics(cate_topics):
+	topics = cate_topics[:-1]
+	topics = topics+om_special_topics
+	return topics
+
+
 '''
 Views
 '''
-
 category_mapping = {"information management": "information", "marketing": "marketing", "om&or": "om", "transportation": "transportation"}
 url_mapping = {"information": "information management", "marketing": "marketing", "om": "om&or", "transportation": "transportation"}
+om_special_topics = [{"title": "Not relevant", "topics": [{"title":"Relevant to IM"}, {"title":"Relevant to Transportation"}, {"title":"Relevant to Marketing"}, {"title":"Not Relevant to All Fields"}]}]
 topics = read_topics()
 
 def login(request):
@@ -50,7 +58,12 @@ def login(request):
 		url_category = category_mapping[category]
 		uid = user[0].index
 		pid = -1
-		choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+		# choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+		users = User.objects.filter(category=category)
+		if (users[0].is_phased1):
+			choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+		else:
+			choosed_papers = Paper.objects.filter(category=category, is_phased2=True)
 		total = len(choosed_papers)
 		if (len(choosed_papers.filter(~Q(label1="")))== total and len(choosed_papers.filter(~Q(label2=""))) == total):
 			return redirect("./compare/%s" %url_category)
@@ -77,7 +90,11 @@ def index(request, url_category, uid, pid):
 	finish_percent = float()
 
 	category = url_mapping[url_category]
-	choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+	users = User.objects.filter(category=category)
+	if (users[0].is_phased1):
+		choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+	else:
+		choosed_papers = Paper.objects.filter(category=category, is_phased2=True)
 	target_paper = choosed_papers[pid]
 	total = len(choosed_papers)
 	system_time = time.time()
@@ -85,6 +102,7 @@ def index(request, url_category, uid, pid):
 	url_prefix = "/label/index/" + url_category +"/"+ uid+"/"
 	prev_url = str()
 	next_url = str()
+	# check url
 	if pid == 0:
 		prev_url = ""
 		next_url = url_prefix + str(pid+1)
@@ -95,6 +113,7 @@ def index(request, url_category, uid, pid):
 		prev_url = url_prefix + str(pid-1)
 		next_url = url_prefix + str(pid+1)
 	label = str()
+	# check uid
 	if uid == "1":
 		users = User.objects.filter(index=uid, category=category)
 		label = target_paper.label1
@@ -112,9 +131,11 @@ def index(request, url_category, uid, pid):
 		finish_percent = (total-unaligned_count)/total*100
 	else:
 		return HttpResponse('<h1>Page was found</h1>')
-
-	# target_paper.keywords_plus = target_paper.keywords_plus.split(";")
-	context = {"uid": uid, "pid": pid, "category": category, "users": users, "paper": target_paper, "prev_url": prev_url, "next_url": next_url, "bar": finish_percent, "url_category": url_category, "label": label, "index": pid+1, "sub_cates": topics[url_category], "time": system_time}
+	cate_topics = topics[url_category]
+	# check om&or management science
+	if url_category=="om" and target_paper.journal == "MANAGEMENT SCIENCE":
+		cate_topics = get_om_topics(cate_topics)
+	context = {"uid": uid, "pid": pid, "category": category, "users": users, "paper": target_paper, "prev_url": prev_url, "next_url": next_url, "bar": finish_percent, "url_category": url_category, "label": label, "index": pid+1, "sub_cates": cate_topics, "time": system_time}
 	return render(request, 'index.html', context)
 
 
@@ -123,7 +144,11 @@ def update(request, url_category, uid, pid):
 	category = url_mapping[url_category]
 	label = request.GET["label"]
 	time_diff = int(time.time()) - int(request.GET["time"])
-	choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+	users = User.objects.filter(category=category)
+	if (users[0].is_phased1):
+		choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+	else:
+		choosed_papers = Paper.objects.filter(category=category, is_phased2=True)
 	target_paper = choosed_papers[int(pid)]
 	print(time_diff)
 	if str(uid)=="1":
@@ -150,8 +175,15 @@ def list(request, url_category, uid):
 		return HttpResponse('<h1>Page was found</h1>')
 	context = dict()
 	category = url_mapping[url_category]
-	choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+	users = User.objects.filter(category=category)
+	if (users[0].is_phased1):
+		choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+		phase = 1
+	else:
+		choosed_papers = Paper.objects.filter(category=category, is_phased2=True)
+		phase = 2
 	context["category"] = category
+	context["title"] = category.upper() + " (Phase 1-"+str(phase)+")"
 	context["url_category"] = url_category
 	context["papers"] = choosed_papers
 	context["uid"] = uid
@@ -170,8 +202,16 @@ def list(request, url_category, uid):
 def compare(request, url_category):
 	context = dict()
 	category = url_mapping[url_category]
-	choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+	users = User.objects.filter(category=category)
+	if (users[0].is_phased1):
+		choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
+		phase = 1
+	else:
+		choosed_papers = Paper.objects.filter(category=category, is_phased2=True)
+		phase = 2
+	# choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
 	context["category"] = category
+	context["title"] = category.upper() + " (Phase 1-"+str(phase)+")"
 	context["url_category"] = url_category
 	context["papers"] = choosed_papers
 	users = User.objects.filter(category=category)
@@ -184,5 +224,16 @@ def compare(request, url_category):
 			unalignment_count +=1
 	context["stat"] = {"user1": users[0].name, "user2": users[1].name, "total": total, "unalignment": unalignment_count, "unalignment_ratio": unalignment_count/total*100}
 	context["sub_cates"] = topics[url_category]
+	context["phase"] = phase
 	context["uid"] = "3"
 	return render(request, "compare.html", context)
+
+def next(request, url_category):
+	category = url_mapping[url_category]
+	users = User.objects.filter(category=category)
+	for user in users:
+		user.is_phased1 = False
+		user.is_phased2 = True
+		user.save()
+	return render(request, "login.html")	
+

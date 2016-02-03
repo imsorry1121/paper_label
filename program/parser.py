@@ -100,7 +100,8 @@ def parse_topic_im():
 		cate_title = texts[0]
 		cate_topic = [{"title": title} for title in texts[1:]]
 		result.append({"title": cate_title, "topics": cate_topic})
-	result.append(parse_relevant("im"))
+	# result.append(parse_relevant("im"))
+	result = result + parse_topic_append("IM")
 	write_json(output_path+"topic_im.json", result)
 
 
@@ -119,8 +120,8 @@ def parse_topic_transportation():
 			desc = texts[i+1].strip()
 			cate_topic.append({"title": ";".join(titles), "sub": ";".join(subs), "desc": desc})
 		result.append({"title": cate_title, "topics": cate_topic})
-	result.append(parse_relevant("transportation"))
-	# print(json.dumps(result, indent=4))
+	# result.append(parse_relevant("transportation"))
+	result = result + parse_topic_append("Transportation")
 	write_json(output_path+"topic_transportation.json", result)
 
 def parse_topic_marketing():
@@ -138,7 +139,8 @@ def parse_topic_marketing():
 		for text in texts[2:]:
 			cate_topic.append({"title": text.strip().replace("\t","")})
 		result.append({"title": cate_title, "sub": cate_sub, "desc": cate_desc, "topics": cate_topic})
-	result.append(parse_relevant("marketing"))
+	# result.append(parse_relevant("marketing"))
+	result = result + parse_topic_append("Marketing")
 	write_json(output_path+"topic_marketing.json", result)
 
 def parse_topic_om():
@@ -155,7 +157,8 @@ def parse_topic_om():
 			title, sub = get_brackets(text)
 			cate_topic.append({"title": title, "sub": sub})
 		result.append({"title": cate_title, "topics": cate_topic})
-	result.append(parse_relevant("OM&OR"))
+	# result.append(parse_relevant("OM&OR"))
+	result = result + parse_topic_append("OM&OR")
 	write_json(output_path+"topic_om.json", result)
 
 def parse_relevant(cate):
@@ -163,6 +166,14 @@ def parse_relevant(cate):
 	for topic in result["topics"]:
 		if cate.lower() in topic.lower():
 			result["topics"].remove(topic)
+	return result
+
+def parse_topic_append(cate):
+	result = list()
+	other = {"title": "Others", "topics": [{"title": "Others but relevent to "+cate}]}
+	not_relevant = {"title": "Not relevant", "topics": [{"title": "Not relevant"}]}
+	result.append(other)
+	result.append(not_relevant)
 	return result
 
 
@@ -211,7 +222,9 @@ def build_db_paper(threshold=200, ratio=0.1):
 				paper.pop("web-of-science-categories")
 				paper["isi"] = paper.get("ID", "")
 				paper.pop("ID")
-				paper["keywords_plus"] = paper.get("keywords-plus", "")
+				# capitaliza?
+				paper["keywords_plus"] = ";".join([keyword.strip().title() for keyword in paper.get("keywords-plus", "").split(";")]) 
+				paper["keyword"] = ";".join([keyword.strip().title() for keyword in paper.get("keyword", "").split(";")]) 
 				# paper["label1"] = ""
 				# paper["label2"] = ""
 				# paper["prediction"] = ""
@@ -220,7 +233,6 @@ def build_db_paper(threshold=200, ratio=0.1):
 			cate_papers[category] = cate_papers.get(category, list())+papers
 	for category, papers in sorted(cate_papers.items()):
 		number = max(threshold, int(len(papers)*0.1))
-		print(number)
 		samples = get_samples(number, len(papers))
 		# samples = random.sample(range(len(papers)), number)
 		for index, sample in enumerate(samples):
@@ -308,9 +320,7 @@ def create_pwd(length):
 # 			fo.write(json.dumps(article, indent=4))
 
 if __name__ == "__main__":
-	preprocess_paper()
 	# preprocess_topic()
-	# preprocess_topic()
-	
+	# preprocess_paper()	
 	build_db_data()
 

@@ -155,10 +155,18 @@
     },
     {
         "topics": [
-            "Relevant to Transportation",
-            "Relevant to OM&OR",
-            "Relevant to Marketing"
+            {
+                "title": "Others but relevent to IM"
+            }
         ],
-        "title": "Not Relevant"
+        "title": "Others"
+    },
+    {
+        "topics": [
+            {
+                "title": "Not relevant"
+            }
+        ],
+        "title": "Not relevant"
     }
 ]

@@ -36,16 +36,16 @@
 		}
 		.abstract{
 			max-height: 280px;
-			overflow: scroll;
+			overflow-y: scroll;
 			font-size: 1.2em;
 		}
 		.item > label{
 			font-size: 0.7em;
 		}
 		.bs-callout {
-			padding: 20px;
+			padding: 5px;
 			margin: 0px 0;
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 			border: 1px solid #eee;
 			border-left-width: 5px;
 			border-radius: 3px;
@@ -101,7 +101,7 @@
 		}
 		.options{
 			/*max-height: 460px;*/
-			overflow: scroll;
+			overflow-y: scroll;
 		}
 		.grid{
 			padding: 10px !important;
@@ -134,8 +134,8 @@
 			<div class="nine wide column">
 				<h3 class="ui header">{{paper.title}}</h3>
 				<p>{{paper.auther}}</p>
-				<p>{{paper.journal}}, {{paper.year}} {{paper.month}}</p>
-				<p>Volume {{paper.volume}}.Number {{paper.number}}.Pages {{paper.pages}}</p>
+				<p>{{paper.journal}}</p>
+				<p>Volume {{paper.volume}}, Number {{paper.number}}, {{paper.year}} {{paper.month}}, Pages {{paper.pages}}</p>
 <!-- 						<div class="ui labels">
 							{% for keyword in paper.keywords_plus%}
 							<a class="ui label">
@@ -143,7 +143,12 @@
 							</a>
 							{% endfor %}
 						</div> -->
-						<p>Keywords: {{paper.keywords_plus}}</p>
+						<div class="ui divider"></div>
+						{% if paper.keyword == "" %}
+							<p>Keywords: {{paper.keywords_plus}}</p>
+						{% else %}
+							<p>Keywords: {{paper.keyword}}</p>
+						{% endif %}
 						<div class="ui divider"></div>
 						<p class="abstract">{{paper.abstract}}</p>
 						<p></p>

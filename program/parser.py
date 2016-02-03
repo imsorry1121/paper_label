@@ -170,7 +170,7 @@ def parse_relevant(cate):
 
 def parse_topic_append(cate):
 	result = list()
-	other = {"title": "Others", "topics": [{"title": "Others but relevent to "+cate}]}
+	other = {"title": "Others", "topics": [{"title": "Others but relevant to "+cate}]}
 	not_relevant = {"title": "Not relevant", "topics": [{"title": "Not relevant"}]}
 	result.append(other)
 	result.append(not_relevant)

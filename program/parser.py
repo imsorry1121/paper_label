@@ -83,13 +83,12 @@ def remove_reduct_symbol(sentence):
 Topic
 '''
 def preprocess_topic():
-	parse_topic_im()
+	parse_topic_information()
 	parse_topic_transportation()
 	parse_topic_om()
 	parse_topic_marketing()
 
-
-def parse_topic_im():
+def parse_topic_information():
 	text_origin = str()
 	result = list()
 	with open(input_path+topic_path+"im", "r") as fi:
@@ -97,13 +96,16 @@ def parse_topic_im():
 	categories = text_origin.split("\n\n")
 	for category in categories:
 		texts = category.split("\n")
-		cate_title = texts[0]
-		cate_topic = [{"title": title} for title in texts[1:]]
+		cate_title = texts[0].strip()
+		cate_topic = list()
+		for i in range(1, len(texts), 2):
+			title = texts[i].split("	")[1]
+			desc = texts[i+1].strip()
+			cate_topic.append({"title": title, "desc": desc})
 		result.append({"title": cate_title, "topics": cate_topic})
-	# result.append(parse_relevant("im"))
+	# result.append(parse_relevant("transportation"))
 	result = result + parse_topic_append("IM")
 	write_json(output_path+"topic_im.json", result)
-
 
 def parse_topic_transportation():
 	text_origin = str()
@@ -322,5 +324,6 @@ def create_pwd(length):
 if __name__ == "__main__":
 	# preprocess_topic()
 	# preprocess_paper()	
-	build_db_data()
+	# build_db_data()
+	parse_topic_information()
 

@@ -2,28 +2,36 @@
     {
         "topics": [
             {
-                "title": "A1 Business process management"
+                "title": "A1 Business process management",
+                "desc": "The unique ways in which organizations coordinate and organize work activities, information, and knowledge to produce a product or service."
             },
             {
-                "title": "A2 Environment of IT: internal or external"
+                "title": "A2 Environment of IT: internal or external",
+                "desc": "A firm must first respond to political shifts, respond to changes in the overall economy (such as changes in labor rates and price inflation), keep track of new technologies, and respond to the changes in global business environment (such as foreign exchange rates). In its immediate environment, firms need to track and share information with suppliers, customers, stockholders, regulators, and logistic partners (such as shipping firms)."
             },
             {
-                "title": "A3 IT and culture"
+                "title": "A3 IT and culture",
+                "desc": "None"
             },
             {
-                "title": "A4 IT value"
+                "title": "A4 IT value",
+                "desc": "None"
             },
             {
-                "title": "A5 Organizational design"
+                "title": "A5 Organizational design",
+                "desc": "The manner in which a management achieves the right combination of differentiation and integration of the organization's operations, in response to the level of uncertainty in its external environment."
             },
             {
-                "title": "A6 IS usage / IS adoption / IT acceptance"
+                "title": "A6 IS usage / IS adoption / IT acceptance",
+                "desc": "None"
             },
             {
-                "title": "A7 Societal issues / Societal impact of IS"
+                "title": "A7 Societal issues / Societal impact of IS",
+                "desc": "Societal issues are noting or pertaining to large social groups, or to their activities, customs, etc."
             },
             {
-                "title": "A8 Sustainability / Green IT/IS"
+                "title": "A8 Sustainability / Green IT/IS",
+                "desc": "Generally Green IT/IS"
             }
         ],
         "title": "A. Individual / Organization / Society"
@@ -31,28 +39,36 @@
     {
         "topics": [
             {
-                "title": "B1 End user computing"
+                "title": "B1 End user computing",
+                "desc": "The part of an information system through which the end user interacts with the system, such as online screens and commands."
             },
             {
-                "title": "B2 Innovation"
+                "title": "B2 Innovation",
+                "desc": "Innovation is a new idea, more effective device or process."
             },
             {
-                "title": "B3 IS management and planning / IS strategy / IT governance"
+                "title": "B3 IS management and planning / IS strategy / IT governance",
+                "desc": "None"
             },
             {
-                "title": "B4 IS staffing"
+                "title": "B4 IS staffing",
+                "desc": "None"
             },
             {
-                "title": "B5 Outsourcing and offshoring"
+                "title": "B5 Outsourcing and offshoring",
+                "desc": "Outsourcing systems development work or maintenance of existing systems to external vendors in another country. Offshoring is the relocation of a business process from one country to another—typically an operational process, such as manufacturing, or supporting processes, such as accounting."
             },
             {
-                "title": "B6 Project management"
+                "title": "B6 Project management",
+                "desc": "Applications of knowledge, skills, tools, and techniques to achieve specific targets within specified budget and time constraints."
             },
             {
-                "title": "B7 Security and privacy"
+                "title": "B7 Security and privacy",
+                "desc": "Policies, procedures, and technical measures used to prevent unauthorized access, alteration, theft, or physical damage to information systems. The claim of individuals to be left alone, free from surveillance or interference from other individuals, organizations, or the state."
             },
             {
-                "title": "B8 Virtual teams"
+                "title": "B8 Virtual teams",
+                "desc": "A virtual team is a group of individuals who work across time, space and organizational boundaries with links strengthened by webs of communication technology."
             }
         ],
         "title": "B. IS Management"
@@ -60,34 +76,44 @@
     {
         "topics": [
             {
-                "title": "C1 Big data / Data Analytics"
+                "title": "C1 Big data / Data Analytics",
+                "desc": "Datasets with volumes so huge that they are beyond the ability of typical relational DBMS to capture, store, and analyze. The data are often unstructured or semi-structured."
             },
             {
-                "title": "C2 Business intelligence/ Expert system"
+                "title": "C2 Business intelligence/ Expert system",
+                "desc": "Applications and technologies to help users make better business decisions/ Knowledge intensive computer programs that capture the expertise of a human in limited domains of knowledge."
             },
             {
-                "title": "C3 Cloud computing"
+                "title": "C3 Cloud computing",
+                "desc": "Model of computing that provides access to a shared pool of computing resources over a network, often the Internet."
             },
             {
-                "title": "C4 Databases / Database management systems / Data warehousing"
+                "title": "C4 Databases / Database management systems / Data warehousing",
+                "desc": "A database is a collection of related files containing records on people, places, or things."
             },
             {
-                "title": "C5 IS design and development"
+                "title": "C5 IS design and development",
+                "desc": "A road map indicating the directions of systems development: the rationale, the current situation, the management strategy, the implementation plan, and the budget."
             },
             {
-                "title": "C6 IS evaluation"
+                "title": "C6 IS evaluation",
+                "desc": "None"
             },
             {
-                "title": "C7 IS implementation"
+                "title": "C7 IS implementation",
+                "desc": "None"
             },
             {
-                "title": "C8 Hardware / Software and programming languages"
+                "title": "C8 Hardware / Software and programming languages",
+                "desc": "Computer hardware consists of technology for computer processing, data storage, input, and output. It also includes equipment for gathering and inputting data, physical media for storing the data, and devices for delivering the processed information as output. (All kind of computer hardware, e.g., computers, peripherals. Not to include telecomm as there is a separate category.) The computer component that contains the instructions that directs computer hardware to carry out tasks. An artificial language used to write software that provides the instructions for the computer about how to accept information, process it, and provide output."
             },
             {
-                "title": "C9 Mobile computing"
+                "title": "C9 Mobile computing",
+                "desc": "Mobile computing is human–computer interaction by which a computer is expected to be transported during normal usage"
             },
             {
-                "title": "C10 Telecommunications and networking"
+                "title": "C10 Telecommunications and networking",
+                "desc": "Telecommunications include data transmission, Internet access, cellular telephone service, and television programming as well as voice service."
             }
         ],
         "title": "C. Information Technology and IS Development"
@@ -95,49 +121,64 @@
     {
         "topics": [
             {
-                "title": "D1 Customer relationship management (CRM)"
+                "title": "D1 Customer relationship management (CRM)",
+                "desc": "Information systems that track all the ways on which a company interacts with its customers and analyzes these interactions to optimize revenue, profitability, customer satisfaction, and customer retention."
             },
             {
-                "title": "D2 Decision support system & executive IS"
+                "title": "D2 Decision support system & executive IS",
+                "desc": "Information systems at the organization’s management level that combine data and sophisticated analytical models or data analysis tools to support semi-structured and unstructured decision making."
             },
             {
-                "title": "D3 E-government"
+                "title": "D3 E-government",
+                "desc": "Use of the internet and related technologies to digitally enable government and public sector agencies’ relationships with citizens, businesses, and other arms of government."
             },
             {
-                "title": "D4 Electronic commerce / Mobile commerce"
+                "title": "D4 Electronic commerce / Mobile commerce",
+                "desc": "The process of buying and selling goods and services electronically involving transactions using the Internet, networks, and other digital technologies./ The use of the mobile technology to execute all the business processes in the enterprise."
             },
             {
-                "title": "D5 Enterprise resource planning (ERP)"
+                "title": "D5 Enterprise resource planning (ERP)",
+                "desc": "Integrated application suite to support the whole enterprise that includes modules to manage financials, human resources, supply chain, customer relationships and other business processes."
             },
             {
-                "title": "D6 Global information technology (GIT)"
+                "title": "D6 Global information technology (GIT)",
+                "desc": "A global information technology is an information technology which is developed and / or used in a global context."
             },
             {
-                "title": "D7 Group support systems "
+                "title": "D7 Group support systems",
+                "desc": "Group support system is a type of computer software that facilitates creative problem solving and decision-making of groups within or across organizations."
             },
             {
-                "title": "D8 Health information technology"
+                "title": "D8 Health information technology",
+                "desc": "Health information technology (HIT) is information technology applied to health and health care. It supports health information management across computerized systems and the secure exchange of health information between consumers, providers, payers, and quality monitors."
             },
             {
-                "title": "D9 Inter-organizational systems"
+                "title": "D9 Inter-organizational systems",
+                "desc": "Information systems that automate the flow of information across organizational boundaries and link a company to its customers, distributors, or suppliers."
             },
             {
-                "title": "D10 IS functional applications"
+                "title": "D10 IS functional applications",
+                "desc": "None"
             },
             {
-                "title": "D11 Knowledge management"
+                "title": "D11 Knowledge management",
+                "desc": "A set of strategies and practices organizations use to become more systematic about managing intellectual capital. It is also a field of study in which researchers investigate all the roles these intangible assets play, how they contribute to competitive advantage and productivity, and how human behavior interacts with efforts to capture and share knowledge."
             },
             {
-                "title": "D12 Media and communications"
+                "title": "D12 Media and communications",
+                "desc": "Includes media like face to face, email, text, and verbal/written communications.  But not the technology, i.e., telecomm and networking."
             },
             {
-                "title": "D13 Social media / Social computing / Social Commerce"
+                "title": "D13 Social media / Social computing / Social Commerce",
+                "desc": "Social media are computer-mediated tools that allow people or companies to create, share, or exchange information, career interests, ideas, and pictures/videos in virtual communities and networks./ Social computing is an area of computer science that is concerned with the intersection of social behavior and computational systems."
             },
             {
-                "title": "D14 Social networks"
+                "title": "D14 Social networks",
+                "desc": "Online community for expanding users’ business or social contacts by making connections through their mutual business or personal connections."
             },
             {
-                "title": "D15 Supply chain management"
+                "title": "D15 Supply chain management",
+                "desc": "Strategies that optimize the flow of products and services from their source to the customer."
             }
         ],
         "title": "D. IS Applications"
@@ -145,10 +186,12 @@
     {
         "topics": [
             {
-                "title": "E1 IS education"
+                "title": "E1 IS education",
+                "desc": "IS education is related to topics of special interests to information systems educators. Papers generally cover one of the following topics: teaching tips; innovative classroom practices; IS curriculum issues; research in IS education; cases for use in an IS classroom; pedagogy in teaching IS subjects; teaching assessment; industry relations; or other related topics in IS education."
             },
             {
-                "title": "E2 IS Theory and Methodology "
+                "title": "E2 IS Theory and Methodology ",
+                "desc": "None"
             }
         ],
         "title": "E. Education and Theory"

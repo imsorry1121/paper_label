@@ -110,7 +110,7 @@ def parse_topic_information():
 def parse_topic_transportation():
 	text_origin = str()
 	result = list()
-	with open(input_path+topic_path+"transportation", "r") as fi:
+	with open(input_path+topic_path+"transportation_new", "r") as fi:
 		text_origin = fi.read()
 	categories = text_origin.split("\n\n")
 	for category in categories:
@@ -326,4 +326,5 @@ if __name__ == "__main__":
 	# preprocess_paper()	
 	# build_db_data()
 	parse_topic_information()
+	parse_topic_transportation()
 

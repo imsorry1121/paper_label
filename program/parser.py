@@ -325,6 +325,6 @@ if __name__ == "__main__":
 	# preprocess_topic()
 	# preprocess_paper()	
 	# build_db_data()
-	parse_topic_information()
+	# parse_topic_information()
 	parse_topic_transportation()
 

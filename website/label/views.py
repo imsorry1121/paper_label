@@ -209,6 +209,10 @@ def compare(request, url_category):
 	else:
 		choosed_papers = Paper.objects.filter(category=category, is_phased2=True)
 		phase = 2
+	total = len(choosed_papers)
+	# if the choosed_papers not all done then redirect to login page
+	if not (len(choosed_papers.filter(~Q(label1="")))== total and len(choosed_papers.filter(~Q(label2=""))) == total):
+		return redirect("/label/login")
 	# choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
 	context["category"] = category
 	context["title"] = category.upper() + " (Phase 1-"+str(phase)+")"

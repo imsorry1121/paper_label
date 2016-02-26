@@ -129,7 +129,7 @@ def parse_topic_transportation():
 def parse_topic_marketing():
 	text_origin = str()
 	result = list()
-	with open(input_path+topic_path+"marketing", "r") as fi:
+	with open(input_path+topic_path+"marketing_new", "r") as fi:
 		text_origin = fi.read()
 	categories = text_origin.split("\n\n")
 	for category in categories:
@@ -139,7 +139,8 @@ def parse_topic_marketing():
 		cate_desc = texts[1].strip()
 		cate_topic = list()
 		for text in texts[2:]:
-			cate_topic.append({"title": text.strip().replace("\t","")})
+			title, sub = get_brackets(text.strip().replace("\t", ""))
+			cate_topic.append({"title": title, "sub": sub})
 		result.append({"title": cate_title, "sub": cate_sub, "desc": cate_desc, "topics": cate_topic})
 	# result.append(parse_relevant("marketing"))
 	result = result + parse_topic_append("Marketing")
@@ -326,5 +327,6 @@ if __name__ == "__main__":
 	# preprocess_paper()	
 	# build_db_data()
 	# parse_topic_information()
-	parse_topic_transportation()
+	parse_topic_marketing()
+	# parse_topic_transportation()
 

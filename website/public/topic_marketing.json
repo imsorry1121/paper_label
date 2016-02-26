@@ -1,263 +1,339 @@
 [
     {
-        "desc": "Consumer behavior is the study of how individual customers, groups or organizations select, buy, use, and dispose ideas, goods, and services to satisfy their needs and wants. It refers to the actions of the consumers in the marketplace and the underlying motives for those actions.消費者行為是指消費者為獲取、使用、處置消費物品或服務所採取的各種行動，包括先於且決定這些行動的決策過程。集中於探討消費者的行為，從消費者的購買決策、消費行為、到消費者忠誠度等。",
         "topics": [
             {
-                "title": "1.Decision Making"
+                "title": "1.Decision Making",
+                "sub": "Family Decision Making; emotional decision making"
             },
             {
-                "title": "2.Purchase Behavior/ Purchase Intention"
+                "title": "2.Purchase Behavior/ Purchase Intention & Buying Process",
+                "sub": "Contextual Effects: Context, Option, Preference. Price and price association"
             },
             {
-                "title": "3.Buying Process"
+                "title": "3.Consumer Culture",
+                "sub": ""
             },
             {
-                "title": "4.Consumer Culture"
+                "title": "4.Self-control and Goals Pursuit",
+                "sub": ""
             },
             {
-                "title": "5.Self-control and Goals"
+                "title": "5.Social Identity and Influence",
+                "sub": ""
             },
             {
-                "title": "6.Social Identity and influence"
+                "title": "6.Brand Choice",
+                "sub": ""
             },
             {
-                "title": "7.Brand Choice"
+                "title": "7.Memory and Search",
+                "sub": ""
             },
             {
-                "title": "8.Consumer Behavior"
+                "title": "8.Persuasion",
+                "sub": "Persuasion, Message, Processing"
+            },
+            {
+                "title": "9.Satisfying customers",
+                "sub": ""
+            },
+            {
+                "title": "10.Resource constraints: Time, cost, resource",
+                "sub": ""
             }
         ],
         "title": "1)Consumer Behavior",
-        "sub": "消費者行為"
+        "sub": "消費者行為",
+        "desc": "Consumer behavior is the study of how individual customers, groups or organizations select, buy, use, and dispose ideas, goods, and services to satisfy their needs and wants. It refers to the actions of the consumers in the marketplace and the underlying motives for those actions.消費者行為是指消費者為獲取、使用、處置消費物品或服務所採取的各種行動，包括先於且決定這些行動的決策過程。集中於探討消費者的行為，從消費者的購買決策、消費行為、到消費者忠誠度等。"
     },
     {
-        "desc": "This topic refers to (a) the types of communication (i.e., advertising, brand, word-of-mouth, etc.), used by a company or individual to reach their target market; (b) the influence of advertising/ brand/ communication.廣告/行銷溝通/品牌議題主要在研究與消費者發生信息交流的途徑，例如:溝通、網路傳播、口碑傳播等等。",
         "topics": [
             {
-                "title": "1.Online Advertising/ Internet Marketing"
+                "title": "1.Online Advertising/ Internet Marketing",
+                "sub": ""
             },
             {
-                "title": "2.Advertising Effectiveness"
+                "title": "2.Advertising Effectiveness",
+                "sub": ""
             },
             {
-                "title": "3.Electronic Word-of-mouth"
+                "title": "3.Word-of-mouth",
+                "sub": ""
             },
             {
-                "title": "4.Visual Communications"
+                "title": "4.Visual Communications",
+                "sub": ""
             },
             {
-                "title": "5.Advertising and Social Media Research"
+                "title": "5.Advertising and Social Media Research",
+                "sub": ""
             },
             {
-                "title": "6.Brand Identity/ Brand Image"
+                "title": "6.Brand Identity/ Brand Image",
+                "sub": ""
             },
             {
-                "title": "7.Brand Experiences/ Trust/ Satisfaction"
+                "title": "7.Brand Experiences/ Trust/ Satisfaction",
+                "sub": ""
             },
             {
-                "title": "8.Brand Loyalty"
+                "title": "8.Brand Loyalty",
+                "sub": ""
             },
             {
-                "title": "9.Brand Personality"
+                "title": "9.Brand Personality",
+                "sub": ""
             },
             {
-                "title": "10.Brand Community"
+                "title": "10.Brand Community",
+                "sub": ""
             },
             {
-                "title": "11.Brand Advertising"
+                "title": "11.Brand Advertising",
+                "sub": ""
             }
         ],
         "title": "2)Advertising/ Marketing Communication/ Brand",
-        "sub": "廣告/行銷溝通/品牌"
+        "sub": "廣告/行銷溝通/品牌",
+        "desc": "This topic refers to (a) the types of communication (i.e., advertising, brand, word-of-mouth, etc.), used by a company or individual to reach their target market; (b) the influence of advertising/ brand/ communication.廣告/行銷溝通/品牌議題主要在研究與消費者發生信息交流的途徑，例如:溝通、網路傳播、口碑傳播等等。"
     },
     {
-        "desc": "Marketing strategies includes all basic, short-term, and long-term activities in the field of marketing that deal with the analysis of the strategic initial situation of a company and the formulation, evaluation and selection of market-oriented strategies.",
         "topics": [
             {
-                "title": "1.Segmentation"
+                "title": "1.Segmentation",
+                "sub": ""
             },
             {
-                "title": "2.Direct Marketing"
+                "title": "2.Direct Marketing",
+                "sub": ""
             },
             {
-                "title": "3.Pricing"
+                "title": "3.Pricing",
+                "sub": ""
             },
             {
-                "title": "4.Marketing Implementation"
+                "title": "4.Marketing Implementation",
+                "sub": ""
             },
             {
-                "title": "5.Strategic Marketing"
+                "title": "5.Strategic Marketing",
+                "sub": ""
             },
             {
-                "title": "6.Business-To-Business Marketing"
+                "title": "6.Business-To-Business Marketing",
+                "sub": ""
             },
             {
-                "title": "7.International Marketing"
+                "title": "7.International Marketing",
+                "sub": ""
             },
             {
-                "title": "8.Market Orientation"
+                "title": "8.Market Orientation",
+                "sub": ""
             },
             {
-                "title": "9.Brand Equity"
+                "title": "9.Brand Equity",
+                "sub": ""
             }
         ],
         "title": "3)Strategy",
-        "sub": "策略"
+        "sub": "策略",
+        "desc": "Marketing strategies includes all basic, short-term, and long-term activities in the field of marketing that deal with the analysis of the strategic initial situation of a company and the formulation, evaluation and selection of market-oriented strategies."
     },
     {
-        "desc": "This topic focuses on services marketing and management of a firm's sales operations.",
         "topics": [
             {
-                "title": "1.Sales Forecasting"
+                "title": "1.Sales Forecasting",
+                "sub": ""
             },
             {
-                "title": "2.Sales Promotion"
+                "title": "2.Sales Promotion",
+                "sub": ""
             },
             {
-                "title": "3.Personal Selling"
+                "title": "3.Personal Selling",
+                "sub": ""
             },
             {
-                "title": "4.Sales Force Management"
+                "title": "4.Sales Force Management",
+                "sub": ""
             },
             {
-                "title": "5.Customer Satisfaction"
+                "title": "5.Customer Satisfaction",
+                "sub": ""
             },
             {
-                "title": "6.Customer Loyalty"
+                "title": "6.Customer Loyalty",
+                "sub": ""
             },
             {
-                "title": "7.Customer Complaint"
+                "title": "7.Customer Complaint",
+                "sub": ""
             },
             {
-                "title": "8.Customer Perceived Value"
+                "title": "8.Customer Perceived Value",
+                "sub": ""
             },
             {
-                "title": "9.Service Quality"
+                "title": "9.Service Quality",
+                "sub": ""
+            },
+            {
+                "title": "10.Customer Relationship Management",
+                "sub": ""
             }
         ],
         "title": "4)Service Marketing/Sales Management",
-        "sub": "服務行銷與銷售管理"
+        "sub": "服務行銷與銷售管理",
+        "desc": "This topic focuses on services marketing and management of a firm's sales operations."
     },
     {
-        "desc": "This topic focuses on looking into marketing channels.",
         "topics": [
             {
-                "title": "1.Retailing"
+                "title": "1.Retailing",
+                "sub": ""
             },
             {
-                "title": "2.Channel Management"
+                "title": "2.Channel Management",
+                "sub": ""
             },
             {
-                "title": "3.Electronic Commerce"
+                "title": "3.Econometrics",
+                "sub": ""
             },
             {
-                "title": "4.Marketing Channels"
+                "title": "4.Marketing Channels",
+                "sub": ""
             }
         ],
         "title": "5)Retailing & Channel",
-        "sub": "零售與通路"
+        "sub": "零售與通路",
+        "desc": "This topic focuses on looking into marketing channels."
     },
     {
-        "desc": "This topic is related with (a) research methods (i.e, bayesian analysis, Econometrics), (b) financial metrics (i.e, Profit And Cost Analysis), or (c) develop measurement.",
         "topics": [
             {
-                "title": "1.Scale Development"
+                "title": "1.Scale Development",
+                "sub": ""
             },
             {
-                "title": "2.Bayesian Methods/ Bayesian Analysis"
+                "title": "2.Bayesian Methods/ Bayesian Analysis",
+                "sub": ""
             },
             {
-                "title": "3.Metrics"
+                "title": "3.Metrics",
+                "sub": ""
             },
             {
-                "title": "4.Econometrics"
+                "title": "4.Econometrics",
+                "sub": ""
             },
             {
-                "title": "5.Profit And Cost Analysis"
+                "title": "5.Profit And Cost Analysis",
+                "sub": ""
             },
             {
-                "title": "6.Marketing-Finance Interface Research"
+                "title": "6.Marketing-Finance Interface Research",
+                "sub": ""
             },
             {
-                "title": "7.Other Methods"
+                "title": "7.Other Methods",
+                "sub": ""
             }
         ],
         "title": "6)Methodological Issues",
-        "sub": "研究方法相關議題"
+        "sub": "研究方法相關議題",
+        "desc": "This topic is related with (a) research methods (i.e, bayesian analysis, Econometrics), (b) financial metrics (i.e, Profit And Cost Analysis), or (c) develop measurement."
     },
     {
-        "desc": "This topic is related with organizational management, focus on “management” issue, for example, supply chain management, human resource management etc.",
         "topics": [
             {
-                "title": "1.Organizational Learning"
+                "title": "1.Organizational Learning",
+                "sub": ""
             },
             {
-                "title": "2.Organizational Structure"
+                "title": "2.Organizational Structure",
+                "sub": ""
             },
             {
-                "title": "3.HR"
+                "title": "3.HR",
+                "sub": ""
             },
             {
-                "title": "4.Supply Chain Management"
+                "title": "4.Supply Chain Management",
+                "sub": ""
             }
         ],
         "title": "7)Organizational Issues",
-        "sub": "組織相關議題"
+        "sub": "組織相關議題",
+        "desc": "This topic is related with organizational management, focus on “management” issue, for example, supply chain management, human resource management etc."
     },
     {
-        "desc": "This topic is related with (a) product/ service development, (b) related actions occurs during product/service development process, i.e., create value, co-create, etc., (c) other issues focus on “product/ service”.",
         "topics": [
             {
-                "title": "1.Coproduction"
+                "title": "1.Coproduction & Idea Generation",
+                "sub": ""
             },
             {
-                "title": "2.Idea Generation"
+                "title": "2.Product/Service Development",
+                "sub": ""
             },
             {
-                "title": "3.New Product Development"
+                "title": "3.Product Promotion",
+                "sub": ""
             },
             {
-                "title": "4.Product Promotion"
+                "title": "4.Value Creation",
+                "sub": ""
             },
             {
-                "title": "5.Value Creation"
+                "title": "5.Service Innovation & Technology-enabled Service",
+                "sub": ""
             }
         ],
         "title": "8)Product/ Service Development",
-        "sub": "產品/服務開發"
+        "sub": "產品/服務開發",
+        "desc": "This topic is related with (a) product/ service development, (b) related actions occurs during product/service development process, i.e., create value, co-create, etc., (c) other issues focus on “product/ service”."
     },
     {
-        "desc": "Miscellaneous",
         "topics": [
             {
-                "title": "1.Customer Relationship Management"
+                "title": "1.Ethics And Social Responsibility",
+                "sub": ""
             },
             {
-                "title": "2.Ethics And Social Responsibility"
+                "title": "2.Nonprofit and Political Marketing",
+                "sub": ""
             },
             {
-                "title": "3.Nonprofit, Political, And Social Marketing"
+                "title": "3.Environmental Commerce and Social Marketing",
+                "sub": ""
             },
             {
-                "title": "4.Environmental Commerce"
+                "title": "4.Social networks",
+                "sub": ""
             },
             {
-                "title": "5.Social networks"
+                "title": "5.Theory And Philosophy Of Science",
+                "sub": "Theory In Marketing"
             },
             {
-                "title": "6.Theory And Philosophy Of Science (Theory In Marketing)"
+                "title": "6.Market or Industry Analysis",
+                "sub": ""
             },
             {
-                "title": "7.Market or Industry Analysis"
+                "title": "7.C2C Marketing",
+                "sub": ""
             }
         ],
         "title": "9)Miscellaneous",
-        "sub": ""
+        "sub": "",
+        "desc": "Miscellaneous"
     },
     {
         "topics": [
             {
-                "title": "Others but relevent to Marketing"
+                "title": "Others but relevant to Marketing"
             }
         ],
         "title": "Others"

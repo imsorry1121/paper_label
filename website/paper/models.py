@@ -19,6 +19,7 @@ class Paper(models.Model):
 	web_of_science_categories = models.CharField(max_length=225, default="")
 	is_phased1 = models.BooleanField(default=False)
 	is_phased2 = models.BooleanField(default=False)
+	phased3 = models.IntegerField(default=0)
 	label1 = models.CharField(max_length=255, default="")
 	label2 = models.CharField(max_length=255, default="")
 	label_final = models.CharField(max_length=255, default="")

@@ -35,16 +35,20 @@ def preprocess_paper():
 			if '.bib' in filename:
 				category = path.split("/")[-2]
 				journal = path.split("/")[-1]
+				# print(os.path.join(path, filename))
 				papers += parse_paper(os.path.join(path, filename))
 		if len(papers) > 0: 
 			if cate_papers.get(category, 0) == 0:
 				cate_papers[category] = dict()
 			cate_papers[category][journal] = papers
+	# papers_add = parse_paper_new("../input/paper/OM&OR/Production and Operations Management/Production and Operations Management(2).bib")
+	# cate_papers["OM&OR"]["Production and Operations Management"]+=papers_add
 	write_json(output_path+parsed_file, cate_papers)
 
-def parse_paper(input_file="../input/Marketing/Marketing Science/Marketing Science(1).bib"):
+
+def parse_paper_new(input_file="../input/Marketing/Marketing Science/Marketing Science(1).bib"):
 	papers_all = list()
-	papers_add = parse_paper_add()
+	papers_add2 = parse_paper_add(input_path+"paper_add2")
 	with open(input_file, "r") as fi:
 		papers = bibtexparser.loads(fi.read())
 	# one bib one article
@@ -53,8 +57,30 @@ def parse_paper(input_file="../input/Marketing/Marketing Science/Marketing Scien
 			continue
 		if paper.get("abstract","") == "":
 			title = remove_reduct_symbol(paper["title"])
-			if papers_add.get(title,"") != "":
-				paper["abstract"] = papers_add[title]
+			if papers_add2.get(title,"") != "":
+				paper["abstract"] = papers_add2[title]
+			else:
+				continue
+			paper_info = dict()
+			for key, value in paper.items():
+				if key in fields:
+					paper_info[key] = remove_reduct_symbol(value)
+			papers_all.append(paper_info)
+	return papers_all
+
+def parse_paper(input_file="../input/Marketing/Marketing Science/Marketing Science(1).bib"):
+	papers_all = list()
+	papers_add1 = parse_paper_add(input_path+"paper_add")
+	with open(input_file, "r") as fi:
+		papers = bibtexparser.loads(fi.read())
+	# one bib one article
+	for paper in papers.entries:
+		if paper["type"] != "Article":
+			continue
+		if paper.get("abstract","") == "":
+			title = remove_reduct_symbol(paper["title"])
+			if papers_add1.get(title,"") != "":
+				paper["abstract"] = papers_add1[title]
 			else:
 				continue
 		paper_info = dict()
@@ -64,16 +90,15 @@ def parse_paper(input_file="../input/Marketing/Marketing Science/Marketing Scien
 		papers_all.append(paper_info)
 	return papers_all
 
-def parse_paper_add():
+def parse_paper_add(filename):
 	papers_abstract = dict()
-	with open(input_path+"paper_add", "r") as fi:
+	with open(filename, "r") as fi:
 		for line in fi:
 			tmp = line.split("\t")
 			title = tmp[0].strip()
 			abstract = tmp[1].strip()
 			papers_abstract[title] = abstract
 	return papers_abstract
-
 
 
 def remove_reduct_symbol(sentence):
@@ -99,7 +124,7 @@ def parse_topic_information():
 		cate_title = texts[0].strip()
 		cate_topic = list()
 		for i in range(1, len(texts), 2):
-			title = texts[i].split("	")[1]
+			title = texts[i].split("	")[1].strip()
 			desc = texts[i+1].strip()
 			cate_topic.append({"title": title, "desc": desc})
 		result.append({"title": cate_title, "topics": cate_topic})
@@ -140,7 +165,7 @@ def parse_topic_marketing():
 		cate_topic = list()
 		for text in texts[2:]:
 			title, sub = get_brackets(text.strip().replace("\t", ""))
-			cate_topic.append({"title": title, "sub": sub})
+			cate_topic.append({"title": title.strip(), "sub": sub})
 		result.append({"title": cate_title, "sub": cate_sub, "desc": cate_desc, "topics": cate_topic})
 	# result.append(parse_relevant("marketing"))
 	result = result + parse_topic_append("Marketing")
@@ -158,7 +183,7 @@ def parse_topic_om():
 		cate_topic = list()
 		for text in texts[1:]:
 			title, sub = get_brackets(text)
-			cate_topic.append({"title": title, "sub": sub})
+			cate_topic.append({"title": title.strip(), "sub": sub})
 		result.append({"title": cate_title, "topics": cate_topic})
 	# result.append(parse_relevant("OM&OR"))
 	result = result + parse_topic_append("OM&OR")
@@ -257,6 +282,10 @@ def build_db_format(model, instances, path):
 	write_json(path, rows)
 
 
+def revise_db_format(path="../prediction/output/", filename="data_predicted.json"):
+	# four cate, choose 100
+
+
 
 ''' 
 IO
@@ -324,9 +353,9 @@ def create_pwd(length):
 
 if __name__ == "__main__":
 	# preprocess_topic()
-	# preprocess_paper()	
+	preprocess_paper()	
 	# build_db_data()
 	# parse_topic_information()
-	parse_topic_marketing()
+	# parse_topic_marketing()
 	# parse_topic_transportation()
 

@@ -6,75 +6,127 @@ import numpy
 from scipy.sparse import lil_matrix
 import json
 import operator
+import random
 
+inputPath = "input/"
+outputPath = "output/"
 stopwordFilename = "stopword.txt"
-dictionaryFilename = "dictionary.txt"
-inputFilename = "input/paper_dump.json"
-docsFilename = "input/docs.json"
+inputFilename = "data_labeled.json"
+outputFilename = "data_predicted.json"
+revisedFilename = "data_predicted_db.json"
+docsFilename = "docs.json"
 
 
+# Description:
+def reviseDBformat():
+	papers = readJson(outputPath+outputFilename)
+	papers_cate = {"information management": list(), "marketing": list(), "transportation": list(), "om&or": list()}
+	for paper in papers:
+		cate = paper["fields"]["category"]
+		papers_cate[cate].append(paper)
+	for cate, cate_papers in papers_cate.items():
+		samples = get_samples(100, len(cate_papers))
+		# print(samples)
+		for index, sample in enumerate(samples):
+			pk = cate_papers[sample]["pk"]
+			while papers[pk-1]["fields"]["is_phased1"]==True or papers[pk-1]["fields"]["is_phased2"]==True:
+				sample+=1
+				pk = cate_papers[sample]["pk"]
+			papers[pk-1]["fields"]["phased3"] = 3
+		count = 1
+		for paper in cate_papers:
+			pk = paper["pk"]
+			if papers[pk-1]["fields"]["is_phased1"]==True or papers[pk-1]["fields"]["is_phased2"]==True:
+				papers[pk-1]["fields"]["phased3"]=0
+			elif papers[pk-1]["fields"].get("phased3",0)==3:
+				continue
+			else:
+				papers[pk-1]["fields"]["phased3"]=count
+				count = count%2+1
+	writeJson(outputPath+revisedFilename, papers)
+
+def get_samples(k, total):
+	a = total/k
+	b = random.random() * a
+	numbers = list()
+	for i in range(k):
+		numbers.append(math.floor(a*i+b))
+	return numbers
+
+
+# Description: build the prediction model and update the prediction json file
 def predictLabel():
-	papers = readJson(inputFilename)
-	docs = getPaperTf(docsFilename, papers)
-
-
+	# Data initialize
+	papers = readJson(inputPath+inputFilename)
+	doc_tf = getPaperTf(inputPath+docsFilename, papers)
 	papers_cate = {"information management": {"training":list(), "testing": list()}, "marketing": {"training":list(), "testing": list()}, "transportation": {"training":list(), "testing": list()}, "om&or": {"training":list(), "testing": list()}}
-	dictionary = dict()
 	for paper in papers:
 		if paper["fields"]["label_final"] != "":
 			papers_cate[paper["fields"]["category"]]["training"].append(paper)
 		else:
 			papers_cate[paper["fields"]["category"]]["testing"].append(paper)
-	print("over loading")
-	# build each dictionary and its idf
-	# for cate, cate_papers in papers_cate.items():
-	cate = "information management"
-	cate_papers = papers_cate[cate]
-	training_indexs = [paper["pk"]-1 for paper in cate_papers["training"]]
-	predict_indexs = [paper["pk"]-1 for paper in cate_papers["testing"]]
-	training_data = [docs[i] for i in training_indexs]
-	testing_data = training_data
-	predict_data = [docs[i] for i in predict_indexs]
+	# Models 
+	for cate, cate_papers in papers_cate.items():
+		print(cate)
+		training_indexs = [paper["pk"]-1 for paper in cate_papers["training"]]
+		predict_indexs = [paper["pk"]-1 for paper in cate_papers["testing"]]
+		training_data = [doc_tf[i] for i in training_indexs]
+		predict_data = [doc_tf[i] for i in predict_indexs]
+		# predict_data = training_data
+		
+		# naive bayes
+		dictionary = buildDictoinaryDf(training_data)
+		gts = [t["fields"]["label_final"] for t in cate_papers["training"]]
+
+		labels = sorted(list(set(gts)))
+		terms = sorted(dictionary.keys())
+		n, nfeature, nlabel, nterm = len(training_data), 500, len(labels), len(terms)
+		# writeDictionary(dictionary, "dict_"+cate)
+		class_df = lil_matrix((nlabel+1, nterm+1))
+		class_tf = lil_matrix((nlabel, nterm+1))
+		label_distri = dict()
+		
+		# init df matrix, tf matrix and label_distri
+		for index, doc in enumerate(training_data):
+			label = gts[index]
+			l_index = labels.index(label)
+			label_distri[l_index] = label_distri.get(l_index,0) + 1
+			for term in doc:
+				# t_index = term_index_mapping[term]
+				t_index = terms.index(term)
+				class_df[l_index, t_index] = class_df[l_index, t_index] + 1
+				class_tf[l_index, t_index] = class_tf[l_index, t_index] + doc[term]
+		# get nc1, nt1 
+		class_prob =  dict([(labels[k], (v/n)) for (k, v) in label_distri.items()])
+		for i in range(nlabel):
+			class_df[i,-1] = label_distri[i]
+			for j in range(nterm):
+				class_df[-1,j] += class_df[i,j]
+		class_df[-1,-1] = n
+
+		feature_indexs = featureSelection(class_df, nfeature, method="llr", score_method="local")
+		class_term_prob = training(class_tf, nfeature, nlabel, feature_indexs, terms, labels)
+		model = {"class": class_prob, "term": class_term_prob}
+		writeJson("model_"+cate, model)
+		predictions = testing(class_prob, class_term_prob, predict_data)
+		# compare(gts, predictions)
+		updatePapers(predictions, predict_indexs, papers)
+	writeJson(outputPath+outputFilename, papers)
+	# merge the prediction to the original file and write
+
+def updatePapers(predictions, predict_indexs, papers):
+	for index, pred in enumerate(predictions):
+		papers[predict_indexs[index]]["fields"]["prediction"] = ",".join(pred)
 
 
-	# naive bayes
-	dictionary_train = buildDictoinaryDf(training_data)
-	nterm = len(dictionary_train)
-	labels = sorted(list(set([t["fields"]["label_final"] for t in cate_papers["training"]])))
-	nlabel = len(labels)
-	print(labels)
-	nfeature = 100
-	n = len(training_data)
-	label_distri = dict()
-	label_index_mapping = dict((v,k) for k,v in enumerate(labels))
-	term_index_mapping = writeDictionary(dictionary_train)
-	index_term_mapping = dict((v,k) for k,v in term_index_mapping.items())
-	class_df = lil_matrix((nlabel+1, nterm+1))
-	class_tf = lil_matrix((nlabel, nterm+1))
-	class_term_prob = dict()
+def compare(gts, predictions):
+	tp = 0
+	for index, gt in enumerate(gts):
+		pred = predictions[index]
+		if gt in pred:
+			tp+=1
+	print("Accuracy:"+ str(tp/len(gts)))
 
-	# init df matrix and tf matrix
-	for index, doc in enumerate(training_data):
-		label = cate_papers["training"][index]["fields"]["label_final"]
-		l_index = label_index_mapping[label]
-		label_distri[l_index] = label_distri.get(l_index,0) + 1
-		for term in doc:
-			t_index = term_index_mapping[term]
-			class_df[l_index, t_index] = class_df[l_index, t_index] + 1
-			class_tf[l_index, t_index] = class_tf[l_index, t_index] + doc[term]
-	# get nc1, nt1 
-	for i in range(nlabel):
-		class_df[i,-1] = label_distri[i]
-		for j in range(nterm):
-			class_df[-1,j] += class_df[i,j]
-	class_df[-1,-1] = n
-	# best
-	feature_indexs = featureSelection(class_df, nfeature, method="llr", score_method="local")
-	training(class_term_prob, class_tf, nfeature, nlabel, feature_indexs, index_term_mapping, labels)
-	testing(class_term_prob, testing_data, labels)
-
-	# use the prediction result to update 
-# need to add class prob
 
 def getPaperTf(filename, papers):
 	stopwords = readStopwords()
@@ -92,7 +144,8 @@ def getPaperTf(filename, papers):
 Classification and feature selection
 '''
 
-def training(class_term_prob, class_tf, nfeature, nlabel, feature_indexs, index_term_mapping, labels):
+def training(class_tf, nfeature, nlabel, feature_indexs, terms, labels):
+	class_term_prob = dict()
 	for i in range(nlabel):
 		for j in feature_indexs:
 			class_tf[i, -1] += class_tf[i, j]
@@ -101,10 +154,9 @@ def training(class_term_prob, class_tf, nfeature, nlabel, feature_indexs, index_
 		class_term_prob[label] = dict()
 		for j in feature_indexs:
 			total_tf = class_tf[i, -1]
-			term = index_term_mapping[j]
+			term = terms[j]
 			class_term_prob[label][term] = (class_tf[i,j]+1)/(total_tf+nfeature)
-	with open("model", "w") as fo:
-		fo.write(json.dumps(class_term_prob, indent=4))
+	return class_term_prob
 
 # Description: read the training label_do
 # Return: dictionary with label and docs
@@ -125,24 +177,26 @@ def readTrainingLabels(filename="training.txt"):
 	return nlabel, doc_label_mapping, training_indexs
 
 
-def testing(class_term_prob, testing_data, labels):
-	with open("output.txt", "w") as fo:
-		for i, doc in enumerate(testing_data):
-			ranking = predict(doc, class_term_prob)
-			top = ranking[0][0]
-			fo.write(top+'\n')
+def testing(class_prob, class_term_prob, testing_data):
+	predictions = list()
+	for i, doc in enumerate(testing_data):
+		ranking = predict(doc, class_prob, class_term_prob)
+		top =  [t[0] for t in ranking[0:3]]
+		# print(top)
+		predictions.append(top)
+	return predictions
 
-def predict(doc, class_term_prob):
+def predict(doc, class_prob, class_term_prob):
 	prediction = int()
 	scores = dict()
 	for label in class_term_prob.keys():
-		scores[label] = score(doc, class_term_prob[label])
+		scores[label] = score(doc, class_term_prob[label], class_prob[label])
 	prediction = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
-	print(prediction)
 	return prediction
 
-def score(doc, probs):
-	score = float()
+def score(doc, probs, class_prob):
+	score = math.log(class_prob)
+	# score = 0
 	for term, tf in doc.items():
 		if term in probs:
 			score += tf*math.log(probs[term])
@@ -326,18 +380,13 @@ def getSentTf(sent, stopwords):
 # Input: dictionary with df
 # Output: dictionary file
 # Return: t_index mapping, start from 1
-def writeDictionary(dictionary):
-	# sort by key
-	termIndex = dict()
-	with open(dictionaryFilename,"w") as fo:
-		# header
+def writeDictionary(dictionary, filename):
+	with open(filename,"w") as fo:
 		fo.write("t_index\tterm\tdf\n")
 		i = 1
 		for term in sorted(dictionary.keys()):
 			fo.write(str(i)+"\t"+term+"\t"+str(dictionary[term])+"\n")
-			termIndex[term] = i-1
 			i+=1
-	return termIndex
 
 def readJson(filename):
 	try:
@@ -353,3 +402,4 @@ def writeJson(filename, result):
 
 if __name__ == "__main__":
 	predictLabel()
+	reviseDBformat()

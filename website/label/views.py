@@ -62,9 +62,12 @@ def login(request):
 		users = User.objects.filter(category=category)
 		if (users[0].is_phased1):
 			choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
-		else:
+		elif (users[0].is_phased2):
 			choosed_papers = Paper.objects.filter(category=category, is_phased2=True)
+		else:
+			choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid, 3])
 		total = len(choosed_papers)
+		# if need to redirect to compare page or list, index page
 		if (len(choosed_papers.filter(~Q(label1="")))== total and len(choosed_papers.filter(~Q(label2=""))) == total):
 			return redirect("./compare/%s" %url_category)
 		else:
@@ -92,13 +95,18 @@ def index(request, url_category, uid, pid):
 	category = url_mapping[url_category]
 	users = User.objects.filter(category=category)
 	if (users[0].is_phased1):
+		phase = 1
 		choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
-	else:
+	elif(users[0].is_phased2):
 		choosed_papers = Paper.objects.filter(category=category, is_phased2=True)
+		phase = 2
+	else:
+		phase = 3
+		choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid, 3])
 	target_paper = choosed_papers[pid]
 	total = len(choosed_papers)
 	system_time = time.time()
-
+	preds = target_paper.prediction.split(",")
 	url_prefix = "/label/index/" + url_category +"/"+ uid+"/"
 	prev_url = str()
 	next_url = str()
@@ -113,7 +121,6 @@ def index(request, url_category, uid, pid):
 		prev_url = url_prefix + str(pid-1)
 		next_url = url_prefix + str(pid+1)
 	label = str()
-	# check uid
 	if uid == "1":
 		users = User.objects.filter(index=uid, category=category)
 		label = target_paper.label1
@@ -135,22 +142,28 @@ def index(request, url_category, uid, pid):
 	# check om&or management science
 	if url_category=="om" and target_paper.journal == "MANAGEMENT SCIENCE":
 		cate_topics = get_om_topics(cate_topics)
-	context = {"uid": uid, "pid": pid, "category": category, "users": users, "paper": target_paper, "prev_url": prev_url, "next_url": next_url, "bar": finish_percent, "url_category": url_category, "label": label, "index": pid+1, "sub_cates": cate_topics, "time": system_time}
+	context = {"uid": uid, "pid": pid, "category": category, "users": users, "paper": target_paper, "prev_url": prev_url, "next_url": next_url, "bar": finish_percent, "url_category": url_category, "label": label, "index": pid+1, "sub_cates": cate_topics, "time": system_time, "phase": phase, "preds":preds}
 	return render(request, 'index.html', context)
 
 
 
-def update(request, url_category, uid, pid):
+def update(request, url_category, uid, pid, label):
 	category = url_mapping[url_category]
-	label = request.GET["label"]
+	print(label)
 	time_diff = int(time.time()) - int(request.GET["time"])
 	users = User.objects.filter(category=category)
 	if (users[0].is_phased1):
+		phase=1
 		choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
-	else:
+	elif(users[0].is_phased2):
+		phase=2
 		choosed_papers = Paper.objects.filter(category=category, is_phased2=True)
+	else:
+		phase=3
+		choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid,3])
 	target_paper = choosed_papers[int(pid)]
 	print(time_diff)
+
 	if str(uid)=="1":
 		target_paper.label1 = label
 		target_paper.time1 = time_diff
@@ -162,7 +175,7 @@ def update(request, url_category, uid, pid):
 		target_paper.time_final = time_diff
 	else:
 		return HttpResponse('<h1>Page was found</h1>')
-	if target_paper.label1 == target_paper.label2:
+	if target_paper.label1!="" and target_paper.label1 == target_paper.label2:
 		target_paper.label_final = label
 		target_paper.time_final = 0
 	target_paper.save()
@@ -179,23 +192,35 @@ def list(request, url_category, uid):
 	if (users[0].is_phased1):
 		choosed_papers = Paper.objects.filter(category=category, is_phased1=True)
 		phase = 1
-	else:
+		context["title"] = category.upper() + " (Phase 1-"+str(phase)+")"
+	elif(users[0].is_phased2):
 		choosed_papers = Paper.objects.filter(category=category, is_phased2=True)
 		phase = 2
+		context["title"] = category.upper() + " (Phase 1-"+str(phase)+")"
+	else:
+		phase = 3
+		context["title"] = category.upper()
+		choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid,3])
 	context["category"] = category
-	context["title"] = category.upper() + " (Phase 1-"+str(phase)+")"
+	context["phase"] = phase
 	context["url_category"] = url_category
 	context["papers"] = choosed_papers
 	context["uid"] = uid
-	users = User.objects.filter(category=category)
 	count1 = 0
 	count2 = 0
-	total = len(choosed_papers)
-	for paper in choosed_papers:
-		if paper.label1 != "":
-			count1+=1
-		if paper.label2 != "":
-			count2+=1
+	if phase==3:
+		total = len(choosed_papers)
+		choosed_papers1 = Paper.objects.filter(category=category, phased3__in=[1,3]).filter(~Q(label1=""))
+		choosed_papers2 = Paper.objects.filter(category=category, phased3__in=[2,3]).filter(~Q(label2=""))
+		count1 = len(choosed_papers1)
+		count2 = len(choosed_papers2)
+	else:
+		total = len(choosed_papers)
+		for paper in choosed_papers:
+			if paper.label1 != "":
+				count1+=1
+			if paper.label2 != "":
+				count2+=1
 	context["stat"] = {"user1": users[0].name, "user2": users[1].name, "finish1": count1, "finish2": count2, "total": total, "percent1": count1/total*100, "percent2": count2/total*100}
 	return render(request, "list.html", context)
 

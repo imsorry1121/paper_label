@@ -162,7 +162,14 @@
 									{% for topic in sub_cate.topics %}
 									<div class="item ui" data-content="{{topic.desc}}" data-title="{{topic.sub}}">
 										<input type="radio" name="frequency"value="{{topic.title}}"> 
+										{% if topic.title in preds%}
+										<div style="color:#A94442;display:inline-block" >
 										{{topic.title}}
+										<i class="trophy icon" style=""></i>
+										</div>
+										{% else %}
+										{{topic.title}}
+										{% endif %}
 									</div>
 									{% endfor %}
 								</div>
@@ -187,11 +194,14 @@
 								<label class="ui label"><label class='ui teal circular label'>{{users.0.name}}</label> {{paper.label1}}</label>
 								<label class="ui label"><label class="ui purple circular label">{{users.1.name}}</label> {{paper.label2}}</label>
 								{% elif uid == "1" and label1 != "" %}
-								<label class="ui label"><label class="ui purple circular label">{{users.0.name}}</label> {{paper.label1}}</label>
+								<label class="ui label"><label class="ui purple circular label">{{users.0.name}}</label> {{label}}</label>
 								{% elif uid == "2" and label2 != "" %}
-								<label class="ui label"><label class="ui purple circular label">{{users.0.name}}</label> {{paper.label2}}</label>
-
+								<label class="ui label"><label class="ui purple circular label">{{users.0.name}}</label> {{label}}</label>
 								{% endif %}
+								{% if phase == 3 %}
+								<label class="ui label"><label class="ui teal circular label">Prediction</label> {{paper.prediction}}</label>
+								{% endif %}
+
 							</div>
 							<div class="five wide column right floated right aligned">
 
@@ -240,7 +250,7 @@
 			</html>
 			<script type="text/javascript">
 				window.onload = function() {
-					var label = "{{label}}";
+					var label = "{{label}}".replace(/&amp;/g, '&');;
 					var radios = $("input[type=radio]")
 					for (var i = 0; i < radios.length; i++) {
 						var radio = radios.eq(i);
@@ -249,7 +259,7 @@
 							radio.attr("checked", true);
 						};
 					}
-					var url_prefix = '/label/update/' + '{{url_category}}'+'/'+'{{uid}}'+'/'+'{{pid}}'+'/?';
+					var url_prefix = '/label/update/' + '{{url_category}}'+'/'+'{{uid}}'+'/'+'{{pid}}'+'/';
 					var url_view = '/label/list/'+ '{{url_category}}'+'/'+'{{uid}}' 
 
 					$("#save").click(function(){
@@ -258,7 +268,8 @@
 						if (radio.length >0){
 							var value = radio.val();
 							var time = Math.round($("#time").html());
-							var url = url_prefix + "label="+value+"&time="+time
+							// var url = url_prefix + 'label="'+value+'"&time='+time
+							var url = url_prefix + value+'/?&time='+time
 							$.get(url, function(data, status){
 								console.log(status);
 								if ($("#btn_forward").length!=0){

@@ -94,7 +94,13 @@
 					<th>Title</th>
 					<!-- <th>Journal</th> -->
 					<!-- <th>Volume</th> -->
+					{% if phase == 3%}
+					<th>Prediction</th>
+
+					{% endif%}
+
 					<th>Label</th>
+
 					<th></th>
 				</tr>
 			</thead>
@@ -105,45 +111,49 @@
 					<th>{{paper.title}}</th>
 					<!-- <th>{{paper.journal}}, {{paper.year}} {{paper.month}}</th> -->
 					<!-- <th>{{paper.volume}} {{paper.number}} {{paper.pages}}</th> -->
+					{% if phase == 3%}
+					<th>{{paper.prediction}}</th>
+					{% endif%}
+
 					{% if uid == '1'%}
-						<th>{{paper.label1}}</th>
-						{% if paper.label1 == "" %}
-						<th>		
-							<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
-								<button class="ui primary button" id="link" value="">
-									Link
-								</button></th>
-							</a>
-						</tr>
-						{% else %}
-						<th>		
-							<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
-								<button class="ui green button" id="link" value="">
-									Link
-								</button></th>
-							</a>
-						</tr>
-						{% endif%}
+					<th>{{paper.label1}}</th>
+					{% if paper.label1 == "" %}
+					<th>		
+						<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
+							<button class="ui primary button" id="link" value="">
+								Link
+							</button></th>
+						</a>
+					</tr>
+					{% else %}
+					<th>		
+						<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
+							<button class="ui green button" id="link" value="">
+								Link
+							</button></th>
+						</a>
+					</tr>
+					{% endif%}
 
 					{% else %}
-						<th>{{paper.label2}}</th>
-						{% if paper.label2 == "" %}
-						<th>		
-							<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
-								<button class="ui primary button" id="link" value="">
-									Link
-								</button></th>
-							</a>
-						</tr>
-						{% else %}
-						<th>		
-							<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
-								<button class="ui green button" id="link" value="">
-									Link
-								</button></th>
-							</a>
-						</tr>
-						{% endif%}
+					<th>{{paper.label2}}</th>
+					{% if paper.label2 == "" %}
+					<th>		
+						<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
+							<button class="ui primary button" id="link" value="">
+								Link
+							</button></th>
+						</a>
+					</tr>
+					{% else %}
+					<th>		
+						<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
+							<button class="ui green button" id="link" value="">
+								Link
+							</button></th>
+						</a>
+					</tr>
+					{% endif%}
 					{% endif%}
 
 <!-- 					{% if uid == '1'%}

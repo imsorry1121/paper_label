@@ -1,7 +1,0 @@
-A7 Societal issues / Societal impact of IS
-B1 End user computing
-A1 Business process management
-A1 Business process management
-B5 Outsourcing and offshoring
-B5 Outsourcing and offshoring
-C1 Big data / Data Analytics

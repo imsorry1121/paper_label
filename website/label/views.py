@@ -201,6 +201,7 @@ def list(request, url_category, uid):
 		phase = 3
 		context["title"] = category.upper()
 		choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid,3])
+	context["title"] = context["title"]+" Phase 2"
 	context["category"] = category
 	context["phase"] = phase
 	context["url_category"] = url_category
@@ -265,4 +266,18 @@ def next(request, url_category):
 		user.is_phased2 = True
 		user.save()
 	return render(request, "login.html")	
+
+def review(request, url_category):
+	context = dict()
+	category = url_mapping[url_category]
+	users = User.objects.filter(category=category)
+	choosed_papers = Paper.objects.filter(Q(category=category, is_phased1=True)|Q(category=category, is_phased2=True))
+	context["category"] = category
+	context["title"] = category.upper() + " Phase 1"
+	context["url_category"] = url_category
+	context["papers"] = choosed_papers
+	context["user1"] = users[0].name
+	context["user2"] = users[1].name
+	return render(request, "review.html", context)
+
 

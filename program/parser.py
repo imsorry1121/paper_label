@@ -130,7 +130,7 @@ def parse_topic_information():
 		result.append({"title": cate_title, "topics": cate_topic})
 	# result.append(parse_relevant("transportation"))
 	result = result + parse_topic_append("IM")
-	write_json(output_path+"topic_im.json", result)
+	write_json(public_path+"topic_im.json", result)
 
 def parse_topic_transportation():
 	text_origin = str()
@@ -149,7 +149,7 @@ def parse_topic_transportation():
 		result.append({"title": cate_title, "topics": cate_topic})
 	# result.append(parse_relevant("transportation"))
 	result = result + parse_topic_append("Transportation")
-	write_json(output_path+"topic_transportation.json", result)
+	write_json(public_path+"topic_transportation.json", result)
 
 def parse_topic_marketing():
 	text_origin = str()
@@ -169,12 +169,12 @@ def parse_topic_marketing():
 		result.append({"title": cate_title, "sub": cate_sub, "desc": cate_desc, "topics": cate_topic})
 	# result.append(parse_relevant("marketing"))
 	result = result + parse_topic_append("Marketing")
-	write_json(output_path+"topic_marketing.json", result)
+	write_json(public_path+"topic_marketing.json", result)
 
 def parse_topic_om():
 	text_origin = str()
 	result = list()
-	with open(input_path+topic_path+"om", "r") as fi:
+	with open(input_path+topic_path+"om_new", "r") as fi:
 		text_origin = fi.read()
 	categories = text_origin.split("\n\n")
 	for category in categories:
@@ -187,7 +187,7 @@ def parse_topic_om():
 		result.append({"title": cate_title, "topics": cate_topic})
 	# result.append(parse_relevant("OM&OR"))
 	result = result + parse_topic_append("OM&OR")
-	write_json(output_path+"topic_om.json", result)
+	write_json(public_path+"topic_om.json", result)
 
 def parse_relevant(cate):
 	result = {"title": "Not Relevant", "topics":["Relevant to IM", "Relevant to Transportation", "Relevant to OM&OR", "Relevant to Marketing"]}
@@ -282,10 +282,6 @@ def build_db_format(model, instances, path):
 	write_json(path, rows)
 
 
-def revise_db_format(path="../prediction/output/", filename="data_predicted.json"):
-	# four cate, choose 100
-
-
 
 ''' 
 IO
@@ -352,8 +348,8 @@ def create_pwd(length):
 # 			fo.write(json.dumps(article, indent=4))
 
 if __name__ == "__main__":
-	# preprocess_topic()
-	preprocess_paper()	
+	preprocess_topic()
+	# preprocess_paper()	
 	# build_db_data()
 	# parse_topic_information()
 	# parse_topic_marketing()

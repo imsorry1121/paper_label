@@ -137,7 +137,7 @@ def stat_others(input_path="../prediction/input/"):
 			tmp.append(paper)
 			paper_cate[cate][label] = tmp
 	for cate in cates:
-		fo = open(cate+".csv", "w")
+		fo = open("../problem/"+cate+".csv", "w")
 		fields = ["title","author","journal","volume","number","pages","year","month","keyword","keyword-plus","abstract"]
 		fo.write(","+",".join(fields)+"\n")
 		cate_topics = paper_cate[cate]

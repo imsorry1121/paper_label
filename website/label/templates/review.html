@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'semantic/dist/semantic.min.js' %}"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300&amp;subset=latin,vietnamese" rel="stylesheet" type="text/css">
+</head>
+<script type="text/javascript"></script>
+<style type="text/css">
+	.container{
+		padding: 30px;
+		padding-top: 70px;
+		padding-bottom: 50px;
+	}
+	.row{
+		height: 20px;
+	}
+	.item{
+		height: 40px;
+	}
+	h1.ui.header{
+		padding-bottom: 20px;
+	}
+	.title{
+		width: 50%;
+	}
+	.answer{
+		width: 10%;
+	}
+	.modal-backdrop.fade{
+		z-index: 999 !important;
+	}
+	.modal-dialog{
+		z-index: 1000;
+		width: 90%;
+	}
+	
+</style>
+<body>
+	<div class="grid container">
+	<button class="ui right labeled icon button" id="back">
+			<i class="left arrow icon"></i>
+			Back
+		</button>
+		<div class="ui message">
+			<div class="ui grid">
+				<div class="nine wide column">
+					<h1 class="ui header">{{title}}</h1>
+				</div>				
+			</div>
+
+		</div>
+		<table class="ui striped table">
+			<thead>
+				<tr>
+					<th>Index</th>
+					<th>Title</th>
+					<th>{{user1}}</th>
+					<th>{{user2}}</th>
+					<th>Final</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for paper in papers%}
+				<tr>
+					<th>{{forloop.counter}}</th>
+					<th class="title">{{paper.title}}
+					</th>
+					<th>{{paper.label1}}</th>
+					<th>{{paper.label2}}</th>
+					<th>{{paper.label_final}}</th>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>
+<script type="text/javascript">
+	$("#back").click(function(){
+		window.history.back();
+	});
+</script>

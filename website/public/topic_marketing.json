@@ -1,7 +1,6 @@
 [
     {
         "desc": "Consumer behavior is the study of how individual customers, groups or organizations select, buy, use, and dispose ideas, goods, and services to satisfy their needs and wants. It refers to the actions of the consumers in the marketplace and the underlying motives for those actions.消費者行為是指消費者為獲取、使用、處置消費物品或服務所採取的各種行動，包括先於且決定這些行動的決策過程。集中於探討消費者的行為，從消費者的購買決策、消費行為、到消費者忠誠度等。",
-        "title": "1)Consumer Behavior",
         "topics": [
             {
                 "title": "1.Decision Making",
@@ -44,11 +43,11 @@
                 "sub": ""
             }
         ],
+        "title": "1)Consumer Behavior",
         "sub": "消費者行為"
     },
     {
         "desc": "This topic refers to (a) the types of communication (i.e., advertising, brand, word-of-mouth, etc.), used by a company or individual to reach their target market; (b) the influence of advertising/ brand/ communication.廣告/行銷溝通/品牌議題主要在研究與消費者發生信息交流的途徑，例如:溝通、網路傳播、口碑傳播等等。",
-        "title": "2)Advertising/ Marketing Communication/ Brand",
         "topics": [
             {
                 "title": "1.Online Advertising/ Internet Marketing",
@@ -95,11 +94,11 @@
                 "sub": ""
             }
         ],
+        "title": "2)Advertising/ Marketing Communication/ Brand",
         "sub": "廣告/行銷溝通/品牌"
     },
     {
         "desc": "Marketing strategies includes all basic, short-term, and long-term activities in the field of marketing that deal with the analysis of the strategic initial situation of a company and the formulation, evaluation and selection of market-oriented strategies.",
-        "title": "3)Strategy",
         "topics": [
             {
                 "title": "1.Segmentation",
@@ -138,11 +137,11 @@
                 "sub": ""
             }
         ],
+        "title": "3)Strategy",
         "sub": "策略"
     },
     {
         "desc": "This topic focuses on services marketing and management of a firm's sales operations.",
-        "title": "4)Service Marketing/Sales Management",
         "topics": [
             {
                 "title": "1.Sales Forecasting",
@@ -185,11 +184,11 @@
                 "sub": ""
             }
         ],
+        "title": "4)Service Marketing/Sales Management",
         "sub": "服務行銷與銷售管理"
     },
     {
         "desc": "This topic focuses on looking into marketing channels.",
-        "title": "5)Retailing & Channel",
         "topics": [
             {
                 "title": "1.Retailing",
@@ -200,7 +199,7 @@
                 "sub": ""
             },
             {
-                "title": "3.Econometrics",
+                "title": "3.Electronic Commerce",
                 "sub": ""
             },
             {
@@ -208,11 +207,11 @@
                 "sub": ""
             }
         ],
+        "title": "5)Retailing & Channel",
         "sub": "零售與通路"
     },
     {
         "desc": "This topic is related with (a) research methods (i.e, bayesian analysis, Econometrics), (b) financial metrics (i.e, Profit And Cost Analysis), or (c) develop measurement.",
-        "title": "6)Methodological Issues",
         "topics": [
             {
                 "title": "1.Scale Development",
@@ -239,11 +238,11 @@
                 "sub": ""
             }
         ],
+        "title": "6)Methodological Issues",
         "sub": "研究方法相關議題"
     },
     {
         "desc": "This topic is related with organizational management, focus on “management” issue, for example, supply chain management, human resource management etc.",
-        "title": "7)Organizational Issues",
         "topics": [
             {
                 "title": "1.Organizational Learning",
@@ -262,11 +261,11 @@
                 "sub": ""
             }
         ],
+        "title": "7)Organizational Issues",
         "sub": "組織相關議題"
     },
     {
         "desc": "This topic is related with (a) product/ service development, (b) related actions occurs during product/service development process, i.e., create value, co-create, etc., (c) other issues focus on “product/ service”.",
-        "title": "8)Product/ Service Development",
         "topics": [
             {
                 "title": "1.Coproduction & Idea Generation",
@@ -289,11 +288,11 @@
                 "sub": ""
             }
         ],
+        "title": "8)Product/ Service Development",
         "sub": "產品/服務開發"
     },
     {
         "desc": "Miscellaneous",
-        "title": "9)Miscellaneous",
         "topics": [
             {
                 "title": "1.Ethics And Social Responsibility",
@@ -324,22 +323,23 @@
                 "sub": ""
             }
         ],
+        "title": "9)Miscellaneous",
         "sub": ""
     },
     {
-        "title": "Others",
         "topics": [
             {
                 "title": "Others but relevant to Marketing"
             }
-        ]
+        ],
+        "title": "Others"
     },
     {
-        "title": "Not relevant",
         "topics": [
             {
                 "title": "Not relevant"
             }
-        ]
+        ],
+        "title": "Not relevant"
     }
 ]

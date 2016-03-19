@@ -142,6 +142,14 @@
             {
                 "title": "C13 Information sharing, Information asymmetry",
                 "sub": "資訊分享與資訊不對稱之議題"
+            },
+            {
+                "title": "C14 Queuing theory",
+                "sub": "等候理論"
+            },
+            {
+                "title": "C15 Algorhtms, Solution Approaches",
+                "sub": "演算法、解題策略"
             }
         ],
         "title": "C. Methods and Technology "
@@ -171,6 +179,10 @@
             {
                 "title": "D6 Production and distribution in food industry",
                 "sub": "食品業之產銷管理"
+            },
+            {
+                "title": "D7 Applications in other industry",
+                "sub": "其他產業之應用"
             }
         ],
         "title": "D. Applications in Specific Industries/Organizations "

@@ -161,7 +161,7 @@
 									<h4 class="ui title" data-content="{{sub_cate.desc}}" data-title="{{sub_cate.sub}}">{{sub_cate.title}}</h4>
 									{% for topic in sub_cate.topics %}
 									<div class="item ui" data-content="{{topic.desc}}" data-title="{{topic.sub}}">
-										<input type="radio" name="frequency"value="{{topic.title}}"> 
+										<input type="checkbox" name="{{topic.title}}" value="{{topic.title}}" onclick="doCheck(this)"> 
 										{% if topic.title in preds%}
 										<div style="color:#A94442;display:inline-block" >
 										{{topic.title}}
@@ -249,14 +249,24 @@
 
 			</html>
 			<script type="text/javascript">
+				var c=0,limit=3; 
+				function doCheck(obj) { 
+					obj.checked?c++:c--; 
+					if(c>limit){ 
+						obj.checked=false; 
+						c--; 
+					} 
+				} 
 				window.onload = function() {
-					var label = "{{label}}".replace(/&amp;/g, '&');;
-					var radios = $("input[type=radio]")
-					for (var i = 0; i < radios.length; i++) {
-						var radio = radios.eq(i);
-						var value = radio.val();
-						if (label==value){
-							radio.attr("checked", true);
+					// var label = "{{label}}".replace(/&amp;/g, '&');
+					var labels = "{{label}}".replace(/&amp;/g, '&').split(";");
+					c = labels.length;
+					var checkboxs = $("input[type=checkbox]")
+					for (var i = 0; i < checkboxs.length; i++) {
+						var checkbox = checkboxs.eq(i);
+						var value = checkbox.val();
+						if (labels.indexOf(value)!=-1){
+							checkbox.attr("checked", true);
 						};
 					}
 					var url_prefix = '/label/update/' + '{{url_category}}'+'/'+'{{uid}}'+'/'+'{{pid}}'+'/';
@@ -264,12 +274,25 @@
 
 					$("#save").click(function(){
 						var labels = "";
-						var radio = $("input[type=radio]:checked")
-						if (radio.length >0){
-							var value = radio.val();
+						var checkboxs = $("input[type=checkbox]:checked");
+						var values = "";
+						if (checkboxs.length >0){
+							console.log(checkboxs);
+							for (var i = 0; i < checkboxs.length; i++){
+								var checkbox = checkboxs.eq(i);
+								var value = checkbox.val();
+								console.log(value);
+								if (i==0){
+									values += value;
+								}
+								else{
+									values += ";"+value;
+								}
+							}
 							var time = Math.round($("#time").html());
-							// var url = url_prefix + 'label="'+value+'"&time='+time
-							var url = url_prefix + value+'/?&time='+time
+							// var url = url_prefix + '?label="'+values+'"&time='+time
+							var url = url_prefix + values+'/?&time='+time
+							console.log(values)
 							$.get(url, function(data, status){
 								console.log(status);
 								if ($("#btn_forward").length!=0){

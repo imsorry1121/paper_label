@@ -199,9 +199,8 @@ def list(request, url_category, uid):
 		context["title"] = category.upper() + " (Phase 1-"+str(phase)+")"
 	else:
 		phase = 3
-		context["title"] = category.upper()
+		context["title"] = category.upper() + " Phase 2"
 		choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid,3])
-	context["title"] = context["title"]+" Phase 2"
 	context["category"] = category
 	context["phase"] = phase
 	context["url_category"] = url_category

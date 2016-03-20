@@ -145,7 +145,7 @@ def parse_topic_transportation():
 		for i in range(1, len(texts), 2):
 			titles, subs = get_multiple_brackets(texts[i].strip().split("	")[1], "、")
 			desc = texts[i+1].strip()
-			cate_topic.append({"title": ";".join(titles), "sub": ";".join(subs), "desc": desc})
+			cate_topic.append({"title": "/".join(titles), "sub": ";".join(subs), "desc": desc})
 		result.append({"title": cate_title, "topics": cate_topic})
 	# result.append(parse_relevant("transportation"))
 	result = result + parse_topic_append("Transportation")

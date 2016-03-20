@@ -19,13 +19,14 @@ docsFilename = "docs.json"
 
 # Description:
 def reviseDBformat():
+	# add label3
 	papers = readJson(outputPath+outputFilename)
 	papers_cate = {"information management": list(), "marketing": list(), "transportation": list(), "om&or": list()}
 	for paper in papers:
 		cate = paper["fields"]["category"]
 		papers_cate[cate].append(paper)
 	for cate, cate_papers in papers_cate.items():
-		samples = get_samples(100, len(cate_papers))
+		samples = get_samples(50, len(cate_papers))
 		# print(samples)
 		for index, sample in enumerate(samples):
 			pk = cate_papers[sample]["pk"]
@@ -36,13 +37,18 @@ def reviseDBformat():
 		count = 1
 		for paper in cate_papers:
 			pk = paper["pk"]
-			if papers[pk-1]["fields"]["is_phased1"]==True or papers[pk-1]["fields"]["is_phased2"]==True:
-				papers[pk-1]["fields"]["phased3"]=0
-			elif papers[pk-1]["fields"].get("phased3",0)==3:
+			# if papers[pk-1]["fields"]["is_phased1"]==True or papers[pk-1]["fields"]["is_phased2"]==True:
+				# papers[pk-1]["fields"]["phased3"]=0
+			if papers[pk-1]["fields"].get("phased3",0)==3:
 				continue
 			else:
 				papers[pk-1]["fields"]["phased3"]=count
 				count = count%2+1
+	for paper in papers:
+		paper["fields"]["time3"] = 0
+		paper["fields"]["time4"] = 0
+		paper["fields"]["label3"] = ""
+		paper["fields"]["label4"] = ""
 	writeJson(outputPath+revisedFilename, papers)
 
 def get_samples(k, total):
@@ -56,6 +62,7 @@ def get_samples(k, total):
 
 # Description: build the prediction model and update the prediction json file
 def predictLabel():
+	# testing要改成兩個都要
 	# Data initialize
 	papers = readJson(inputPath+inputFilename)
 	doc_tf = getPaperTf(inputPath+docsFilename, papers)
@@ -63,8 +70,8 @@ def predictLabel():
 	for paper in papers:
 		if paper["fields"]["label_final"] != "":
 			papers_cate[paper["fields"]["category"]]["training"].append(paper)
-		else:
-			papers_cate[paper["fields"]["category"]]["testing"].append(paper)
+		# else:
+		papers_cate[paper["fields"]["category"]]["testing"].append(paper)
 	# Models 
 	for cate, cate_papers in papers_cate.items():
 		print(cate)
@@ -116,7 +123,7 @@ def predictLabel():
 
 def updatePapers(predictions, predict_indexs, papers):
 	for index, pred in enumerate(predictions):
-		papers[predict_indexs[index]]["fields"]["prediction"] = ",".join(pred)
+		papers[predict_indexs[index]]["fields"]["prediction"] = ";".join(pred)
 
 
 def compare(gts, predictions):

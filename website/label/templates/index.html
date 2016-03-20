@@ -181,26 +181,19 @@
 					</div>
 					<div class="ui grid" style="margin-left:35px;margin-right:30px">
 						<div class="eleven wide column left floated">
-							{% if uid == '3' %}
-							<a href="/label/compare/{{url_category}}/">
+								{% if uid == '3' %}
+								<a href="/label/compare/{{url_category}}/">
 								{% else %}
 								<a href="/label/list/{{url_category}}/{{uid}}">
-									{% endif %}
-									<button class="ui primary button" id="btn_view">
-										View All
-									</button>
+								{% endif %}
+								<button class="ui primary button" id="btn_view">
+								View All
+								</button>
 								</a>
-								{% if uid == '3' %}
-								<label class="ui label"><label class='ui teal circular label'>{{users.0.name}}</label> {{paper.label1}}</label>
-								<label class="ui label"><label class="ui purple circular label">{{users.1.name}}</label> {{paper.label2}}</label>
-								{% elif uid == "1" and label1 != "" %}
-								<label class="ui label"><label class="ui purple circular label">{{users.0.name}}</label> {{label}}</label>
-								{% elif uid == "2" and label2 != "" %}
-								<label class="ui label"><label class="ui purple circular label">{{users.0.name}}</label> {{label}}</label>
-								{% endif %}
-								{% if phase == 3 %}
-								<label class="ui label"><label class="ui teal circular label">Prediction</label> {{paper.prediction}}</label>
-								{% endif %}
+
+								<!-- {% if phase == 3 %} -->
+								<!-- {% endif %} -->
+
 
 							</div>
 							<div class="five wide column right floated right aligned">
@@ -231,6 +224,28 @@
 							</div>
 						</div>
 						<div style="padding-left:55px;padding-right:45px">
+								<div>
+								{% if uid == '3' %}
+								<label class="ui label"><label class='ui teal basic label'>{{users.0.name}}</label> {{paper.label1}}</label>
+								<label class="ui label"><label class="ui purple basic label">{{users.1.name}}</label> {{paper.label2}}</label>
+								{% elif uid == "1" %}
+								<label class="ui label"><label class="ui purple basic label">{{users.0.name}}</label> {{label}}</label>
+								{% else %}
+								<label class="ui label"><label class="ui purple basic label">{{users.1.name}}</label> {{label}}</label>
+								{% endif %}
+								</div>
+								<div>
+								<label class="ui label"><label class="ui teal basic label">Prediction</label> 
+								{% for pred in preds %}
+								<label class="ui green circular label">{{forloop.counter}}</label>
+								{{pred}}
+								{% endfor %}
+								</label>
+								<!-- {{paper.prediction}}</label> -->
+								{% if paper.label_final != "" %}
+								<label class="ui label"><label class="ui teal basic label">Previous</label><label class="ui green circular label">{{users.0.name}}</label> {{paper.label1}}<label class="ui green circular label">{{users.1.name}}</label> {{paper.label2}}<label class="ui green circular label">Final</label> {{paper.label_final}}</label>
+								{% endif %}
+								</div>	
 							{% if uid != "3" %}
 							<div class="progress" >
 								<!-- <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="{{bar}}" aria-valuemin="0" aria-valuemax="100" style="width: {{bar}}%"> -->
@@ -259,8 +274,13 @@
 				} 
 				window.onload = function() {
 					// var label = "{{label}}".replace(/&amp;/g, '&');
-					var labels = "{{label}}".replace(/&amp;/g, '&').split(";");
-					c = labels.length;
+					var label = "{{label}}";
+					var labels = [];
+					if (label != ""){
+						var labels = label.replace(/&amp;/g, '&').split(";");
+						c = labels.length;
+					}
+					console.log(c);
 					var checkboxs = $("input[type=checkbox]")
 					for (var i = 0; i < checkboxs.length; i++) {
 						var checkbox = checkboxs.eq(i);

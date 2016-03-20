@@ -3,43 +3,43 @@
         "topics": [
             {
                 "desc": "包含航空、海運、鐵公路及城市交通發展規劃。",
-                "title": "運輸系統設計與分析",
-                "sub": "design and/or analysis of transportation systems"
+                "sub": "design and/or analysis of transportation systems",
+                "title": "運輸系統設計與分析"
             },
             {
                 "desc": "以計量經濟及數學模型，改善運輸模型。離散選擇模型(Discrete choice modelling)以及流量均衡模型(Traffic equilibrium model)是近來常用的模型理論。",
-                "title": "優化運輸模型",
-                "sub": "optimizing transportation problems"
+                "sub": "optimizing transportation problems",
+                "title": "優化運輸模型"
             },
             {
                 "desc": "將運輸學門跨領域結合物理學、行為理論、計量經濟、生物科學，針對駕駛者/旅行者/巨觀車流的行為找出適合的模型，進而改善現有的運輸問題。",
-                "title": "駕駛者/旅行者/車流行為模型",
-                "sub": "driver/traveler/traffic flow behavior modeling"
+                "sub": "driver/traveler/traffic flow behavior modeling",
+                "title": "駕駛者/旅行者/車流行為模型"
             },
             {
                 "desc": "隨著科技進步，將新的資訊技術結合既有的運輸理論來發展新的運輸科技系統。",
-                "title": "資訊技術與運輸系統",
-                "sub": "transportation technology"
+                "sub": "transportation technology",
+                "title": "資訊技術與運輸系統"
             },
             {
                 "desc": "建立與分析新的運輸模型。",
-                "title": "運輸模型設計與分析",
-                "sub": ""
+                "sub": "",
+                "title": "運輸模型設計與分析"
             },
             {
                 "desc": "對於旅行時間、排程時間等時間預測規劃與分析。",
-                "title": "時間預測與規劃",
-                "sub": ""
+                "sub": "",
+                "title": "時間預測與規劃"
             },
             {
                 "desc": "在服務系統內的等候行為。",
-                "title": "等候理論",
-                "sub": ""
+                "sub": "",
+                "title": "等候理論"
             },
             {
                 "desc": "運輸理論與方法其他問題。",
-                "title": "運輸理論與方法其他問題",
-                "sub": ""
+                "sub": "",
+                "title": "運輸理論與方法其他問題"
             }
         ],
         "title": "運輸理論與方法"
@@ -48,33 +48,33 @@
         "topics": [
             {
                 "desc": "關注政策制定者如何決定政策，監測政策帶來的影響，並建議如何改善。",
-                "title": "交通政策",
-                "sub": "transport policy"
+                "sub": "transport policy",
+                "title": "交通政策"
             },
             {
                 "desc": "關於公共運輸及交通規畫的研究。",
-                "title": "交通基礎建設;城市交通規劃;公共運輸規劃",
-                "sub": "transportation infrastructure;urban  transportation planning;public transportation planning"
+                "sub": "transportation infrastructure;urban  transportation planning;public transportation planning",
+                "title": "交通基礎建設/城市交通規劃/公共運輸規劃"
             },
             {
                 "desc": "研究運輸成本並建議適當的定價策略",
-                "title": "運輸成本與訂價",
-                "sub": "transportation costs & pricing"
+                "sub": "transportation costs & pricing",
+                "title": "運輸成本與訂價"
             },
             {
                 "desc": "結合服務科學提供運輸服務業更好的解決方案。",
-                "title": "運輸服務品質",
-                "sub": "transportation service"
+                "sub": "transportation service",
+                "title": "運輸服務品質"
             },
             {
                 "desc": "在運輸規劃中所使用的策略。",
-                "title": "策略",
-                "sub": "strategy"
+                "sub": "strategy",
+                "title": "策略"
             },
             {
                 "desc": "運輸經濟與政策其他問題。",
-                "title": "運輸經濟與政策其他問題",
-                "sub": ""
+                "sub": "",
+                "title": "運輸經濟與政策其他問題"
             }
         ],
         "title": "運輸經濟與政策"
@@ -83,38 +83,38 @@
         "topics": [
             {
                 "desc": "解決在運輸網路中，運具服務分配問題。",
-                "title": "運輸網路交通指派",
-                "sub": "transportation network traffic assignment"
+                "sub": "transportation network traffic assignment",
+                "title": "運輸網路交通指派"
             },
             {
                 "desc": "在已建立好的網路圖中，找出最佳路徑規劃。",
-                "title": "最佳運輸路徑",
-                "sub": "optimal path"
+                "sub": "optimal path",
+                "title": "最佳運輸路徑"
             },
             {
                 "desc": "城市規劃或運輸規劃中的設施區位選擇問題",
-                "title": "區位選擇",
-                "sub": "location"
+                "sub": "location",
+                "title": "區位選擇"
             },
             {
                 "desc": "在複雜的運輸網路問題中，改善演算法，以降低求解速度，取得品質更佳的運算結果。",
-                "title": "網路演算法",
-                "sub": "network algorithms"
+                "sub": "network algorithms",
+                "title": "網路演算法"
             },
             {
                 "desc": "網路上流量平衡與流量預測等問題。",
-                "title": "網路流量分析",
-                "sub": ""
+                "sub": "",
+                "title": "網路流量分析"
             },
             {
                 "desc": "網路設計與建構及其他分析。",
-                "title": "網路設計與分析",
-                "sub": ""
+                "sub": "",
+                "title": "網路設計與分析"
             },
             {
                 "desc": "網路其他問題。",
-                "title": "網路其他問題",
-                "sub": ""
+                "sub": "",
+                "title": "網路其他問題"
             }
         ],
         "title": "運輸網路"
@@ -123,18 +123,18 @@
         "topics": [
             {
                 "desc": "在設計運輸規劃時加入安全因素或是改善交通規畫以達到交通事故的預防及分析。",
-                "title": "交通事故預防與分析",
-                "sub": "traffic accident countermeasure and analysis"
+                "sub": "traffic accident countermeasure and analysis",
+                "title": "交通事故預防與分析"
             },
             {
                 "desc": "研究酒駕、分心...等駕駛行為對交通安全的影響。",
-                "title": "駕駛行為與安全分析",
-                "sub": "driving violation behavior and safety analysis"
+                "sub": "driving violation behavior and safety analysis",
+                "title": "駕駛行為與安全分析"
             },
             {
                 "desc": "其他安全問題。",
-                "title": "其他安全問題",
-                "sub": ""
+                "sub": "",
+                "title": "其他安全問題"
             }
         ],
         "title": "運輸安全"
@@ -143,33 +143,33 @@
         "topics": [
             {
                 "desc": "供應鏈上的協同合作。",
-                "title": "供應鏈協同整合",
-                "sub": "supply chain collaboration"
+                "sub": "supply chain collaboration",
+                "title": "供應鏈協同整合"
             },
             {
                 "desc": "在貨物運送過程中，規劃適當行車路線及載量，滿足各點需求。",
-                "title": "車輛途程問題(VRP)",
-                "sub": "vehicle routing problems"
+                "sub": "vehicle routing problems",
+                "title": "車輛途程問題(VRP)"
             },
             {
                 "desc": "針對不同產品特色研究存貨策略。",
-                "title": "存貨管理",
-                "sub": "inventory management"
+                "sub": "inventory management",
+                "title": "存貨管理"
             },
             {
                 "desc": "利用新的資訊技術整合物聯網、大數據，打造更精確及快速反應的運籌管理系統。",
-                "title": "IT技術整合",
-                "sub": ""
+                "sub": "",
+                "title": "IT技術整合"
             },
             {
                 "desc": "貨櫃堆疊等相關問題。",
-                "title": "貨櫃相關問題",
-                "sub": ""
+                "sub": "",
+                "title": "貨櫃相關問題"
             },
             {
                 "desc": "其他物流問題。",
-                "title": "其他物流問題",
-                "sub": ""
+                "sub": "",
+                "title": "其他物流問題"
             }
         ],
         "title": "物流管理"
@@ -178,28 +178,28 @@
         "topics": [
             {
                 "desc": "針對在災害發生後，物資運送以及運輸系統中斷的災害應變研究。",
-                "title": "災害應變",
-                "sub": "emergency response of disaster"
+                "sub": "emergency response of disaster",
+                "title": "災害應變"
             },
             {
                 "desc": "將環保因素加入供應鏈整合，包含回收、綠色運輸、環保原料、環保包裝...等。",
-                "title": "綠色供應鏈",
-                "sub": "green supply chain management"
+                "sub": "green supply chain management",
+                "title": "綠色供應鏈"
             },
             {
                 "desc": "找出運輸系統對環境的影響、自然資源的消耗和大氣的污染，結合綠色能源技術，運用能源規劃，減少溫室氣體排放，打造永續運輸環境。",
-                "title": "能源管理/降低GHG排放/永續運輸",
-                "sub": ""
+                "sub": "",
+                "title": "能源管理/降低GHG排放/永續運輸"
             },
             {
                 "desc": "運輸系統對環境造成的影響與改善。",
-                "title": "運輸系統與環境的交互作用",
-                "sub": ""
+                "sub": "",
+                "title": "運輸系統與環境的交互作用"
             },
             {
                 "desc": "其他環境與能源問題。",
-                "title": "其他環境與能源問題",
-                "sub": ""
+                "sub": "",
+                "title": "其他環境與能源問題"
             }
         ],
         "title": "環境與能源"

@@ -22,9 +22,13 @@ class Paper(models.Model):
 	phased3 = models.IntegerField(default=0)
 	label1 = models.CharField(max_length=255, default="")
 	label2 = models.CharField(max_length=255, default="")
+	label3 = models.CharField(max_length=255, default="")
+	label4 = models.CharField(max_length=255, default="")
 	label_final = models.CharField(max_length=255, default="")
 	time1 = models.FloatField(default=0)
 	time2 = models.FloatField(default=0)
+	time3 = models.FloatField(default=0)
+	time4 = models.FloatField(default=0)
 	time_final = models.FloatField(max_length=255, default=0)
 	prediction = models.TextField(default="")
 	

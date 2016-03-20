@@ -31,12 +31,12 @@
 </style>
 <body>
 	<div class="grid container">
-		<a href="/label/review/{{url_category}}">
+<!-- 		<a href="/label/review/{{url_category}}">
 		<button class="ui right labeled icon button">
 			<i class="right arrow icon"></i>
 			Review
 		</button>
-		</a>
+		</a> -->
 		<div class="ui message">
 			<div class="ui grid">
 				<div class="nine wide column">
@@ -63,7 +63,7 @@
 							<p>{{stat.user1}}</p>	
 						</div>
 						<div class="col-lg-1">
-							{{stat.finish1}}/{{stat.total}}
+							{{stat.finish1}}/{{stat.total1}}
 						</div>
 						<div class="col-lg-10">
 							<div class="progress">
@@ -79,7 +79,7 @@
 							<p>{{stat.user2}}</p>	
 						</div>
 						<div class="col-lg-1">
-							{{stat.finish2}}/{{stat.total}}
+							{{stat.finish2}}/{{stat.total2}}
 						</div>
 						<div class="col-lg-10">
 							<div class="progress">
@@ -122,8 +122,8 @@
 					{% endif%}
 
 					{% if uid == '1'%}
-					<th>{{paper.label1}}</th>
-					{% if paper.label1 == "" %}
+					<th>{{paper.label3}}</th>
+					{% if paper.label3 == "" %}
 					<th>		
 						<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
 							<button class="ui primary button" id="link" value="">
@@ -142,8 +142,8 @@
 					{% endif%}
 
 					{% else %}
-					<th>{{paper.label2}}</th>
-					{% if paper.label2 == "" %}
+					<th>{{paper.label4}}</th>
+					{% if paper.label4 == "" %}
 					<th>		
 						<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
 							<button class="ui primary button" id="link" value="">

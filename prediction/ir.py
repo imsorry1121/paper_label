@@ -11,9 +11,10 @@ import random
 inputPath = "input/"
 outputPath = "output/"
 stopwordFilename = "stopword.txt"
-inputFilename = "data_labeled.json"
-outputFilename = "data_predicted.json"
-revisedFilename = "data_predicted_db.json"
+# inputFilename = "data_labeled.json"
+inputFilename = "data_labeled_v2.json"
+outputFilename = "data_predicted_v2.json"
+revisedFilename = "data_predicted_db_v2.json"
 docsFilename = "docs.json"
 
 
@@ -62,7 +63,6 @@ def get_samples(k, total):
 
 # Description: build the prediction model and update the prediction json file
 def predictLabel():
-	# testing要改成兩個都要
 	# Data initialize
 	papers = readJson(inputPath+inputFilename)
 	doc_tf = getPaperTf(inputPath+docsFilename, papers)
@@ -123,6 +123,13 @@ def predictLabel():
 
 def updatePapers(predictions, predict_indexs, papers):
 	for index, pred in enumerate(predictions):
+		target_paper = papers[predict_indexs[index]]
+		if target_paper["fields"]["category"]=="om&or" and target_paper["fields"]["journal"]!="MANAGEMENT SCIENCE":
+			om_special_topics = ["Relevant to IM", "Relevant to Transportation", "Relevant to Marketing", "Not Relevant to All Fields"]
+			for i in range(len(pred)-1,-1,-1):
+				p = pred[i]
+				if p in om_special_topics:
+					pred.remove(p)
 		papers[predict_indexs[index]]["fields"]["prediction"] = ";".join(pred)
 
 
@@ -185,6 +192,8 @@ def readTrainingLabels(filename="training.txt"):
 
 
 def testing(class_prob, class_term_prob, testing_data):
+	# if the journal is 
+	
 	predictions = list()
 	for i, doc in enumerate(testing_data):
 		ranking = predict(doc, class_prob, class_term_prob)
@@ -404,7 +413,7 @@ def readJson(filename):
 
 def writeJson(filename, result):
 	with open(filename, "w") as fo:
-		fo.write(json.dumps(result, indent=4))
+		fo.write(json.dumps(result, indent=4, ensure_ascii=False))
 
 
 if __name__ == "__main__":

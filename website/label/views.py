@@ -75,7 +75,8 @@ def login(request):
 					pid = index
 					break
 		if pid == -1:
-			return redirect("./list/%s/%s" % (url_category, uid))
+			# return redirect("./list/%s/%s" % (url_category, uid))
+			return redirect("./compare/%s" %(url_category))
 		else:
 			return redirect("./index/%s/%s/%s" %(url_category, uid, pid))
 
@@ -160,6 +161,9 @@ def index(request, url_category, uid, pid):
 		label = target_paper.label4
 		unlabel_count = len(choosed_papers.filter(label4=""))
 		finish_percent = (total-unlabel_count)/total*100
+	elif uid == "3":
+		label = target_paper.label_final
+		unlabel_count = len(choosed_papers.filter(label_final=""))
 	else:
 		return HttpResponse('<h1>Page was found</h1>')
 	cate_topics = topics[url_category]
@@ -228,11 +232,11 @@ def index(request, url_category, uid, pid):
 # 	context = {"uid": uid, "pid": pid, "category": category, "users": users, "paper": target_paper, "prev_url": prev_url, "next_url": next_url, "bar": finish_percent, "url_category": url_category, "label": label, "index": pid+1, "sub_cates": cate_topics, "time": system_time, "phase": phase, "preds":preds}
 # 	return render(request, 'index.html', context)
 
+# revise here
 def update(request, url_category, uid, pid, label):
 	category = url_mapping[url_category]
 	print(label)
 	time_diff = int(time.time()) - int(request.GET["time"])
-	users = User.objects.filter(category=category)
 	choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid,3])
 	target_paper = choosed_papers[int(pid)]
 	print(time_diff)
@@ -243,6 +247,9 @@ def update(request, url_category, uid, pid, label):
 	elif uid=="2":
 		target_paper.label4 = label
 		target_paper.time4 = time_diff
+	elif uid=="3":
+		target_paper.label_final = label
+		target_paper.time_final = time_diff
 	else:
 		return HttpResponse('<h1>Page was found</h1>')
 	target_paper.save()
@@ -352,6 +359,27 @@ def list(request, url_category, uid):
 	print(count1/total1)
 	context["stat"] = {"user1": users[0].name, "user2": users[1].name, "finish1": count1, "finish2": count2, "total1": total1, "total2":total2, "percent1": count1/total1*100, "percent2": count2/total2*100}
 	return render(request, "list.html", context)
+
+
+def compare(request, url_category):
+	context = dict()
+	category = url_mapping[url_category]
+	users = User.objects.filter(category=category)
+	choosed_papers = Paper.objects.filter(category=category, phased3=3)
+	context["category"] = category
+	context["title"] = category.upper()
+	context["url_category"] = url_category
+	context["papers"] = choosed_papers
+	users = User.objects.filter(category=category)
+	unalignment_count = int()
+	total = len(choosed_papers)
+	for paper in choosed_papers:
+		if paper.label3 != paper.label4 and paper.label_final == "":
+			unalignment_count +=1
+	context["stat"] = {"user1": users[0].name, "user2": users[1].name, "total": total, "unalignment": unalignment_count, "unalignment_ratio": unalignment_count/total*100}
+	context["sub_cates"] = topics[url_category]
+	context["uid"] = "3"
+	return render(request, "compare2.html", context)
 
 # def compare(request, url_category):
 # 	context = dict()

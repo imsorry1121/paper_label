@@ -11,14 +11,19 @@ import random
 inputPath = "input/"
 outputPath = "output/"
 stopwordFilename = "stopword.txt"
-# inputFilename = "data_labeled.json"
-inputFilename = "data_labeled_v2.json"
-outputFilename = "data_predicted_v2.json"
+inputFilename = "data_labeled_v4.json"
+outputFilename = "data_predicted_v4.json"
+inputFilename = ""
 revisedFilename = "data_predicted_db_v2.json"
 docsFilename = "docs.json"
 
+# revise 車輛途程問題 to 車輛途程問題(VRP) by hand
+# Description: save data_labeled to json
+def reviseDataLabeled():
+	papers = readJson(inputPath+inputFilename)
+	writeJson(inputPath+inputFilename, papers)
 
-# Description:
+# Description: get sample for phase 3 and add time3, time4, label3, label4
 def reviseDBformat():
 	# add label3
 	papers = readJson(outputPath+outputFilename)
@@ -60,6 +65,86 @@ def get_samples(k, total):
 		numbers.append(math.floor(a*i+b))
 	return numbers
 
+# Description: predict the labels with multiple labels
+def predictMultiLabel():
+	# Data initialize
+	# papers = readJson(inputPath+inputFilename)
+	papers = readJson("../website/public/data_final2.json")
+	print(len(papers))
+	doc_tf = getPaperTf(inputPath+docsFilename, papers)
+	papers_cate = {"information management": {"training":list(), "testing": list()}, "marketing": {"training":list(), "testing": list()}, "transportation": {"training":list(), "testing": list()}, "om&or": {"training":list(), "testing": list()}}
+	for paper in papers:
+		if paper["fields"]["label3"] != "" or paper["fields"]["label4"] != "":
+			papers_cate[paper["fields"]["category"]]["training"].append(paper)
+		# if paper["fields"]["label_final"] != "":
+			# papers_cate[paper["fields"]["category"]]["training"].append(paper)
+		# else:
+		papers_cate[paper["fields"]["category"]]["testing"].append(paper)
+	# Models 
+	for cate, cate_papers in papers_cate.items():
+		print(cate)
+		training_indexs = [paper["pk"]-1 for paper in cate_papers["training"]]
+		predict_indexs = [paper["pk"]-1 for paper in cate_papers["testing"]]
+		training_data = [doc_tf[i] for i in training_indexs]
+		predict_data = [doc_tf[i] for i in predict_indexs]
+		# predict_data = training_data
+		
+		# naive bayes
+		dictionary = buildDictoinaryDf(training_data)
+		# gts = [t["fields"]["label_final"] for t in cate_papers["training"]]
+		gts = list()
+		for t in cate_papers["training"]:
+			if t["fields"]["label3"]!="":
+				gts.append(t["fields"]["label3"])
+			else:
+				gts.append(t["fields"]["label4"])
+
+		# revise gts here
+		labels = set()
+		for gt in gts:
+			labels.update(set(gt.split(";")))
+		labels = sorted(list(labels))
+		terms = sorted(dictionary.keys())
+		n, nfeature, nlabel, nterm = len(training_data), 500, len(labels), len(terms)
+		# writeDictionary(dictionary, "dict_"+cate)
+		class_df = lil_matrix((nlabel+1, nterm+1))
+		class_tf = lil_matrix((nlabel, nterm+1))
+		label_distri = dict()
+		
+		# init df matrix, tf matrix and label_distri
+		n = 0
+		for index, doc in enumerate(training_data):
+			# label = gts[index]
+			labels_doc = gts[index].split(";")
+			n += len(labels_doc)
+			for label in labels_doc:
+				l_index = labels.index(label)
+				label_distri[l_index] = label_distri.get(l_index,0) + 1
+				for term in doc:
+					# t_index = term_index_mapping[term]
+					t_index = terms.index(term)
+					class_df[l_index, t_index] = class_df[l_index, t_index] + 1
+					class_tf[l_index, t_index] = class_tf[l_index, t_index] + doc[term]
+		print(n)
+		# get nc1, nt1 
+		class_prob =  dict([(labels[k], (v/n)) for (k, v) in label_distri.items()])
+		for i in range(nlabel):
+			class_df[i,-1] = label_distri[i]
+			for j in range(nterm):
+				class_df[-1,j] += class_df[i,j]
+		class_df[-1,-1] = n
+
+		feature_indexs = featureSelection(class_df, nfeature, method="llr", score_method="local")
+		class_term_prob = training(class_tf, nfeature, nlabel, feature_indexs, terms, labels)
+		model = {"class": class_prob, "term": class_term_prob}
+		writeJson("model_"+cate, model)
+		predictions = testing(class_prob, class_term_prob, predict_data)
+		# compare(gts, predictions)
+		updatePapers(predictions, predict_indexs, papers)
+	# writeJson(outputPath+outputFilename, papers)
+	writeJson("../website/public/data_final2_predicted.json", papers)
+	# merge the prediction to the original file and write
+
 
 # Description: build the prediction model and update the prediction json file
 def predictLabel():
@@ -84,7 +169,6 @@ def predictLabel():
 		# naive bayes
 		dictionary = buildDictoinaryDf(training_data)
 		gts = [t["fields"]["label_final"] for t in cate_papers["training"]]
-
 		labels = sorted(list(set(gts)))
 		terms = sorted(dictionary.keys())
 		n, nfeature, nlabel, nterm = len(training_data), 500, len(labels), len(terms)
@@ -416,6 +500,12 @@ def writeJson(filename, result):
 		fo.write(json.dumps(result, indent=4, ensure_ascii=False))
 
 
+
+
+
 if __name__ == "__main__":
-	predictLabel()
-	reviseDBformat()
+	# reviseDataLabeled()
+	predictMultiLabel()
+	
+	# predictLabel()
+	# reviseDBformat()

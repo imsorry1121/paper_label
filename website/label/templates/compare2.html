@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'semantic/dist/semantic.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'semantic/dist/semantic.min.js' %}"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300&amp;subset=latin,vietnamese" rel="stylesheet" type="text/css">
+</head>
+<script type="text/javascript"></script>
+<style type="text/css">
+	.container{
+		padding: 30px;
+		padding-top: 70px;
+		padding-bottom: 50px;
+	}
+	.row{
+		height: 20px;
+	}
+	.item{
+		height: 40px;
+	}
+	h1.ui.header{
+		padding-bottom: 20px;
+	}
+	.title{
+		width: 50%;
+	}
+	.answer{
+		width: 10%;
+	}
+	.modal-backdrop.fade{
+		z-index: 999 !important;
+	}
+	.modal-dialog{
+		z-index: 1000;
+		width: 90%;
+	}
+	
+</style>
+<body>
+	<div class="grid container">
+		<div class="ui message">
+			<div class="ui grid">
+				<div class="nine wide column">
+					<h1 class="ui header">{{title}}</h1>
+				</div>				
+			</div>
+			
+			<div class="ui list">
+				<div class="item">
+					<div class="row">
+						<div class="col-lg-1">
+							<p>Unalignment</p>	
+						</div>
+						<div class="col-lg-1">
+							{{stat.unalignment}}/{{stat.total}}
+						</div>
+						<div class="col-lg-10">
+							<div class="progress">
+								<div class="progress-bar progress-bar-striped progress-bar-danger" role="progressbar" aria-valuenow="{{stat.unalignment_ratio}}" aria-valuemin="0" aria-valuemax="100" style="width: {{stat.unalignment_ratio}}%">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<table class="ui striped table">
+			<thead>
+				<tr>
+					<th>Index</th>
+					<th>Title</th>
+					<th>{{stat.user1}}</th>
+					<th>{{stat.user2}}</th>
+					<th>Final</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for paper in papers%}
+				<tr>
+					<th>{{forloop.counter}}</th>
+					<th class="title">{{paper.title}}
+<!-- 						<div>Journal: {{paper.journal}}</div>
+						<div>Abstract: {{paper.abstract}}</div>
+						<div>Keyword-plus: {{paper.keywords_plus}}</div>
+						<div></div> -->
+					</th>
+					<th>{{paper.label3}}</th>
+					<th>{{paper.label4}}</th>
+					<th>{{paper.label_final}}</th>
+					<th class="answer">
+						<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
+							{% if paper.label3 == paper.label4 %}
+							<button class="ui purple button">Link</button>
+							{% elif paper.label_final != "" %}
+							<button class="ui green button">Link</button>
+							{% else %}
+							<button class="ui red button">Link</button>
+							{% endif %}
+						</a>
+					</th>
+				</tr>
+
+
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".title").children().hide();
+	})
+		// $(".title").hover(
+		// 	function(){
+		// 		$(this).children().show(100);
+		// 	},
+		// 	function(){
+		// 		$(this).children().hide(100);
+
+		// 	}
+		// 	)
+</script>

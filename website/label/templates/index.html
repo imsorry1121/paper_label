@@ -226,8 +226,9 @@
 						<div style="padding-left:55px;padding-right:45px">
 								<div>
 								{% if uid == '3' %}
-								<label class="ui label"><label class='ui teal basic label'>{{users.0.name}}</label> {{paper.label1}}</label>
-								<label class="ui label"><label class="ui purple basic label">{{users.1.name}}</label> {{paper.label2}}</label>
+								<label class="ui label"><label class='ui teal basic label'>{{users.0.name}}</label> {{paper.label3}}</label>
+								<label class="ui label"><label class="ui purple basic label">{{users.1.name}}</label> {{paper.label4}}</label>
+								<label class="ui label"><label class="ui purple basic label">Final label</label> {{label}}</label>
 								{% elif uid == "1" %}
 								<label class="ui label"><label class="ui purple basic label">{{users.0.name}}</label> {{label}}</label>
 								{% else %}
@@ -242,9 +243,9 @@
 								{% endfor %}
 								</label>
 								<!-- {{paper.prediction}}</label> -->
-								{% if paper.label_final != "" %}
+<!-- 								{% if paper.label_final != "" %}
 								<label class="ui label"><label class="ui teal basic label">Previous</label><label class="ui green circular label">{{users.0.name}}</label> {{paper.label1}}<label class="ui green circular label">{{users.1.name}}</label> {{paper.label2}}<label class="ui green circular label">Final</label> {{paper.label_final}}</label>
-								{% endif %}
+								{% endif %} -->
 								</div>	
 							{% if uid != "3" %}
 							<div class="progress" >

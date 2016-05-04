@@ -10,6 +10,7 @@ fields = ['ID', 'author', 'title', 'journal', 'year', 'volumn', 'number', 'pages
 'volume', 'abstract', 'type', 'keyword', 'keywords-plus', 'web-of-science-categories']
 input_path = '../input/'
 paper_path = "paper/"
+paper_new_path = "paper_new/"
 topic_path = "topic/"
 output_path = '../output/'
 public_path = "../website/public/"
@@ -41,10 +42,31 @@ def preprocess_paper():
 			if cate_papers.get(category, 0) == 0:
 				cate_papers[category] = dict()
 			cate_papers[category][journal] = papers
+			# print(category+","+journal+","+str(len(papers)))
 	# papers_add = parse_paper_new("../input/paper/OM&OR/Production and Operations Management/Production and Operations Management(2).bib")
 	# cate_papers["OM&OR"]["Production and Operations Management"]+=papers_add
+
 	write_json(output_path+parsed_file, cate_papers)
 
+# Description: preprocess new download paper
+def preprocess_paper2():
+	mapping = {"IM": "information management", "Marketing":"marketing", "OM&OR":"om&or", "Transportation": "transportation"}
+	cate_papers = dict()
+	for path, folders, fnames in os.walk(input_path+paper_new_path):
+		papers = list()
+		for fname in fnames:
+			if '.bib' in fname:
+				category = mapping[path.split("/")[-1].split("-")[0]]
+				journal = path.split("/")[-1].split("-")[1]
+				papers += parse_paper(os.path.join(path, fname))
+		if len(papers) > 0: 
+			if cate_papers.get(category, 0) == 0:
+				cate_papers[category] = dict()
+			cate_papers[category][journal] = papers
+	write_json(output_path+"parsed2.json", cate_papers)
+
+
+# def parse_paper_new2(input_path="../input/paper_new/")
 
 def parse_paper_new(input_file="../input/Marketing/Marketing Science/Marketing Science(1).bib"):
 	papers_all = list()
@@ -271,6 +293,60 @@ def build_db_paper(threshold=200, ratio=0.1):
 		instances += papers
 	build_db_format("paper.paper", instances, public_path+"data_paper.json")
 
+
+
+def add_db_paper():
+	data_new = read_json(output_path+"parsed2.json")
+	data_exist = read_json(input_path+"data_final.json")
+	isis = [paper["fields"]["isi"] for paper in data_exist]
+	instances = list()
+	cate_papers = dict()
+	# revise label_final
+	for p in data_exist:
+		if p["fields"]["label3"] == p["fields"]["label4"]:
+			p["fields"]["label_final"] = p["fields"]["label3"]
+			print(p["pk"])
+	# parse new papers
+	for category, cate_dict in sorted(data_new.items()):
+		for j, papers in sorted(cate_dict.items()):
+			papers_new = list()
+			for paper in papers:
+				if paper["ID"] in isis:
+					print(paper["title"])
+					continue
+				paper["category"] = category.lower()
+				paper["web_of_science_categories"] = paper.get("web-of-science-categories", "")
+				paper.pop("web-of-science-categories")
+				paper["isi"] = paper.get("ID", "")
+				paper.pop("ID")
+				paper["keywords_plus"] = ";".join([keyword.strip().title() for keyword in paper.get("keywords-plus", "").split(";")]) 
+				if paper["keywords_plus"] != "":
+					paper.pop("keywords-plus")
+				paper["keyword"] = ";".join([keyword.strip().title() for keyword in paper.get("keyword", "").split(";")]) 
+				# paper["label1"] = ""
+				# paper["label2"] = ""
+				paper["prediction"] = ""
+				paper["time3"] = 0
+				paper["time4"] = 0
+				paper["label3"] = ""
+				paper["label4"] = ""
+				papers_new.append(paper)
+			cate_papers[category] = cate_papers.get(category, list())+papers_new
+	for category, papers in sorted(cate_papers.items()):
+		print(category, len(papers))
+		for index, p in enumerate(papers):
+			papers[index]["phased3"] = index%2+1
+		instances += papers
+	for index, instance in enumerate(instances):
+		row = dict()
+		row["fields"] = instance
+		row["model"] = "paper.paper"
+		row["pk"] = index+1+7405
+		data_exist.append(row)
+	write_json(public_path+"data_final2.json", data_exist)
+
+
+
 def build_db_format(model, instances, path):
 	rows = list()
 	for index, instance in enumerate(instances):
@@ -348,9 +424,11 @@ def create_pwd(length):
 # 			fo.write(json.dumps(article, indent=4))
 
 if __name__ == "__main__":
-	preprocess_topic()
+	# preprocess_topic()
 	# preprocess_paper()	
+	# preprocess_paper2()
 	# build_db_data()
+	add_db_paper()
 	# parse_topic_information()
 	# parse_topic_marketing()
 	# parse_topic_transportation()

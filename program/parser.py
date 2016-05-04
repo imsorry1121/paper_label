@@ -302,10 +302,14 @@ def add_db_paper():
 	instances = list()
 	cate_papers = dict()
 	# revise label_final
+	# revise volume
 	for p in data_exist:
 		if p["fields"]["label3"] == p["fields"]["label4"]:
 			p["fields"]["label_final"] = p["fields"]["label3"]
 			print(p["pk"])
+		if p["fields"]["journal"] == "JOURNAL OF MANAGEMENT INFORMATION SYSTEMS" and p["fields"]["volume"]=="31" and p["fields"]["number"]=="4":
+			print(p["fields"]["year"], p["fields"]["journal"])
+			p["fields"]["volume"]="32"
 	# parse new papers
 	for category, cate_dict in sorted(data_new.items()):
 		for j, papers in sorted(cate_dict.items()):

@@ -25,6 +25,7 @@ class Paper(models.Model):
 	label3 = models.CharField(max_length=255, default="")
 	label4 = models.CharField(max_length=255, default="")
 	label_final = models.CharField(max_length=255, default="")
+	label_manual = models.CharField(max_length=255, default="")
 	time1 = models.FloatField(default=0)
 	time2 = models.FloatField(default=0)
 	time3 = models.FloatField(default=0)

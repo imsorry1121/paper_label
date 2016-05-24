@@ -66,6 +66,35 @@ def preprocess_paper2():
 	write_json(output_path+"parsed2.json", cate_papers)
 
 
+def preprocess_editorial():
+	for path, folders, fnames in os.walk(input_path+paper_path+"Information Management/"):
+		papers = list()
+		for fname in fnames:
+			if '.bib' in fname:
+				# journal = path.split("/")[-1].split("-")[1]
+				papers += parse_editorial_paper(os.path.join(path, fname))
+	write_json(output_path+"parsed_edit_im.json", papers)
+
+def parse_editorial_paper(input_file="../input/Marketing/Marketing Science/Marketing Science(1).bib"):
+	papers_all = list()
+	paper_type = "Editorial Material"
+	with open(input_file, "r") as fi:
+		papers = bibtexparser.loads(fi.read())
+	# one bib one article
+	for paper in papers.entries:
+		if paper["type"] != paper_type:
+			continue
+		if paper.get("abstract","") == "":
+			title = remove_reduct_symbol(paper["title"])
+		paper_info = dict()
+		for key, value in paper.items():
+			if key in fields:
+				paper_info[key] = remove_reduct_symbol(value)
+		papers_all.append(paper_info)
+	return papers_all
+
+
+
 # def parse_paper_new2(input_path="../input/paper_new/")
 
 def parse_paper_new(input_file="../input/Marketing/Marketing Science/Marketing Science(1).bib"):
@@ -432,8 +461,10 @@ if __name__ == "__main__":
 	# preprocess_paper()	
 	# preprocess_paper2()
 	# build_db_data()
-	add_db_paper()
-	# parse_topic_information()
+	# add_db_paper()
+	parse_topic_information()
 	# parse_topic_marketing()
 	# parse_topic_transportation()
+
+	# preprocess_editorial()
 

@@ -139,7 +139,28 @@
 							</button></th>
 						</a>
 					</tr>
+					{% endif %}
+
+					{% elif uid == '0' %}
+					<th>{{paper.label_manual}}</th>
+					{% if paper.label_manual == "" %}
+					<th>		
+						<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
+							<button class="ui primary button" id="link" value="">
+								Link
+							</button></th>
+						</a>
+					</tr>
+					{% else %}
+					<th>		
+						<a href="/label/index/{{url_category}}/{{uid}}/{{forloop.counter0}}">
+							<button class="ui green button" id="link" value="">
+								Link
+							</button></th>
+						</a>
+					</tr>
 					{% endif%}
+
 
 					{% else %}
 					<th>{{paper.label4}}</th>
@@ -160,6 +181,7 @@
 						</a>
 					</tr>
 					{% endif%}
+
 					{% endif%}
 
 <!-- 					{% if uid == '1'%}

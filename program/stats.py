@@ -300,6 +300,28 @@ def stat_top_label(input_path="../result/"):
 			w.writerow([year]+[s for count, s in topn])
 	fo.close()
 
+def output_im_word_data():
+	data = ut.readJson2Dict(result_path, "data_final.json")
+	words = ["Neuro IS", "NeuroIS", "Neuro-IS", "Virtual World", "Online game", "Ethics", "Open Source"]
+	papers = list()
+	for paper in data:
+		cate = paper["fields"]["category"]
+		if cate != "information management":
+			continue
+		if paper["fields"]["phased3"]==3:
+			s = set(paper["fields"]["label3"].split(";")).union(set(paper["fields"]["label4"].split(";")))
+		elif paper["fields"]["phased3"]==2:
+			s = set(paper["fields"]["label4"].split(";"))
+		else:
+			s =set(paper["fields"]["label3"].split(";"))
+		if "Others but relevant to IM" in s:
+			continue
+		for w in words:
+			if w in paper["fields"]["abstract"]:
+				papers.append(paper)
+				break
+	output_paper("../output/stat_im_new_topic.csv", papers)
+
 def output_err_data():
 	data = ut.readJson2Dict(result_path, "data_final.json")
 	papers_428 = list()
@@ -357,7 +379,8 @@ if __name__ == "__main__":
 	# stat_label_distri()
 	# stat_top_label()
 	# stat_other_label()
-	output_err_data()
+	# output_err_data()
+	output_im_word_data()
 
 
 

@@ -11,6 +11,7 @@ urlpatterns = patterns("label.views",
     url(r'^update/(?P<url_category>[\w]+)/(?P<uid>[0-9]{1})/(?P<pid>[0-9]+)/(?P<label>[\w\s/&();.\-:,]+)/$', 'update', name="update"),
     url(r'^compare/(?P<url_category>[\w]+)/$', 'compare', name="compare"),
     url(r'^next/(?P<url_category>[\w]+)/$', 'next', name="next"),
+    # url(r'^other/(?P<url_category>[\w]+)/$', 'other', name="other"),
     # url(r'^review/(?P<url_category>[\w]+)/$', 'review', name="review"),
     # url(r'^delete/', 'delete', name="delete"),
 )

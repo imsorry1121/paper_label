@@ -130,7 +130,10 @@ def index(request, url_category, uid, pid):
 	pid = int(pid)
 	finish_percent = float()
 	category = url_mapping[url_category]
-	choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid, 3])
+	if uid == "0":
+		choosed_papers = Paper.objects.filter(category=category)
+	else:	
+		choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid, 3])
 	target_paper = choosed_papers[pid]
 	total = len(choosed_papers)
 	system_time = time.time()
@@ -164,6 +167,9 @@ def index(request, url_category, uid, pid):
 	elif uid == "3":
 		label = target_paper.label_final
 		unlabel_count = len(choosed_papers.filter(label_final=""))
+	elif uid == "0":
+		label = ""
+		unlabel_count = 0
 	else:
 		return HttpResponse('<h1>Page was found</h1>')
 	cate_topics = topics[url_category]
@@ -237,7 +243,10 @@ def update(request, url_category, uid, pid, label):
 	category = url_mapping[url_category]
 	print(label)
 	time_diff = int(time.time()) - int(request.GET["time"])
-	choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid,3])
+	if uid == "0":
+		choosed_papers = Paper.objects.filter(category=category)
+	else:	
+		choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid,3])
 	target_paper = choosed_papers[int(pid)]
 	print(time_diff)
 
@@ -250,6 +259,8 @@ def update(request, url_category, uid, pid, label):
 	elif uid=="3":
 		target_paper.label_final = label
 		target_paper.time_final = time_diff
+	elif uid == "0":
+		target_paper.label_manual = label
 	else:
 		return HttpResponse('<h1>Page was found</h1>')
 	target_paper.save()
@@ -335,12 +346,16 @@ def update(request, url_category, uid, pid, label):
 
 def list(request, url_category, uid):
 	# return paper list
-	if uid != "1" and uid != "2":
+	if uid != "1" and uid != "2" and uid !="0":
 		return HttpResponse('<h1>Page was found</h1>')
+
 	context = dict()
 	category = url_mapping[url_category]
 	users = User.objects.filter(category=category)
-	choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid,3])
+	if uid == "0":
+		choosed_papers = Paper.objects.filter(category=category)
+	else:
+		choosed_papers = Paper.objects.filter(category=category, phased3__in=[uid,3])
 	context["category"] = category
 	context["url_category"] = url_category
 	context["papers"] = choosed_papers
@@ -380,6 +395,14 @@ def compare(request, url_category):
 	context["sub_cates"] = topics[url_category]
 	context["uid"] = "3"
 	return render(request, "compare2.html", context)
+
+# def other(request, url_category):
+# 	category = url_mapping[url_category]
+# 	choosed_papers = Paper.objects.filter(category=category)
+# 	papers = list()
+# 	for paper in choosed_papers:
+# 		set(paper.label3.split(";"))+set(paper.label4.split(";"))
+
 
 # def compare(request, url_category):
 # 	context = dict()
@@ -435,5 +458,6 @@ def review(request, url_category):
 	context["user1"] = users[0].name
 	context["user2"] = users[1].name
 	return render(request, "review.html", context)
+
 
 

@@ -33,6 +33,18 @@ def output_article(papers, output_path, cate):
 		fo.write("\n")
 	fo.close()
 
+def output_edit_im():
+	data = ut.readJson2Dict("../output/", "parsed_edit_im.json")
+	fields = ["title","author","journal","volume","number","pages","year","month","keyword","keyword-plus","abstract"]
+	fo = open(output_path+"papers_im_editorial"+".csv", "w")
+	fo.write("index,"+",".join(fields)+"\n")
+	for index, paper in enumerate(data):
+		fo.write(str(index+1))
+		for field in fields:
+			fo.write(",\""+paper.get(field,"")+"\"")
+		fo.write("\n")
+	fo.close()
+
 def output_label(papers, output_path, cate):
 	mapping_cate = read_mapping()
 	mapping = mapping_cate[cate]
@@ -108,6 +120,7 @@ def readCsvList(path, filename):
 
 
 if __name__ == "__main__":
-	output_data()
+	output_edit_im()
+	# output_data()
 	# output_topics()
 	# print(readCsvList(output_path, "mapping_marketing.csv"))

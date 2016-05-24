@@ -118,6 +118,10 @@
             {
                 "desc": "Telecommunications include data transmission, Internet access, cellular telephone service, and television programming as well as voice service.",
                 "title": "C10 Telecommunications and networking"
+            },
+            {
+                "desc": "None",
+                "title": "C11 Open Source"
             }
         ],
         "title": "C. Information Technology and IS Development"
@@ -183,6 +187,10 @@
             {
                 "desc": "Strategies that optimize the flow of products and services from their source to the customer.",
                 "title": "D15 Supply chain management"
+            },
+            {
+                "desc": "None",
+                "title": "D16 Entertainment software / Virtual Worlds"
             }
         ],
         "title": "D. IS Applications"
@@ -196,6 +204,14 @@
             {
                 "desc": "None",
                 "title": "E2 IS Theory and Methodology"
+            },
+            {
+                "desc": "None",
+                "title": "E3 NeuroIS"
+            },
+            {
+                "desc": "None",
+                "title": "E4 IS ethics"
             }
         ],
         "title": "E. Education and Theory"

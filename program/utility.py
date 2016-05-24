@@ -288,4 +288,6 @@ def removeWinSpace():
 if __name__=="__main__":
 	# removeWinSpace()
 	# getTopic("Her Code Got Humans on the Moon—And Invented Software Itself http://t.co/NAHqCNoaJT via @WIRED")
-	getTopic("Her code was awesome，but 不知道別人的")
+	# getTopic("Her code was awesome，but 不知道別人的")
+	tmp = readJson2Dict("../website/public/", "data_final3.json")
+	writeDict2Json("../website/public/", "data_final3_revised.json", tmp)

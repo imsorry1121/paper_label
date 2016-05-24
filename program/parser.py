@@ -462,7 +462,7 @@ if __name__ == "__main__":
 	# preprocess_paper2()
 	# build_db_data()
 	# add_db_paper()
-	parse_topic_information()
+	# parse_topic_information()
 	# parse_topic_marketing()
 	# parse_topic_transportation()
 
